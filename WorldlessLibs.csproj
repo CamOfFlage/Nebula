@@ -9,21 +9,51 @@
     <ItemGroup>
       <Reference Include="0Harmony">
         <HintPath>..\..\Libraries\Bepinex\0Harmony.dll</HintPath>
+        <Private>False</Private>
+      </Reference>
+      <Reference Include="Assembly-CSharp">
+        <HintPath>..\..\Libraries\Game Libraries\Assembly-CSharp.dll</HintPath>
+        <Private>False</Private>
+      </Reference>
+      <Reference Include="Assembly-CSharp-firstpass">
+        <HintPath>..\..\Libraries\Game Libraries\Assembly-CSharp-firstpass.dll</HintPath>
+        <Private>False</Private>
       </Reference>
       <Reference Include="BepInEx.Core">
         <HintPath>..\..\Libraries\Bepinex\BepInEx.Core.dll</HintPath>
+        <Private>False</Private>
       </Reference>
       <Reference Include="BepInEx.Unity.IL2CPP">
         <HintPath>..\..\Libraries\Bepinex\BepInEx.Unity.IL2CPP.dll</HintPath>
+        <Private>False</Private>
       </Reference>
       <Reference Include="Il2CppInterop.Runtime">
         <HintPath>..\..\Libraries\Bepinex\Il2CppInterop.Runtime.dll</HintPath>
+        <Private>False</Private>
+      </Reference>
+      <Reference Include="Il2Cppmscorlib">
+        <HintPath>..\..\..\..\OneDrive\Desktop\Weird Steam Downloads\Modded Worldless\BepInEx\interop\Il2Cppmscorlib.dll</HintPath>
+        <Private>False</Private>
+      </Reference>
+      <Reference Include="Noname">
+        <HintPath>..\..\Libraries\Game Libraries\Noname.dll</HintPath>
+        <Private>False</Private>
+      </Reference>
+      <Reference Include="Noname.Worldless.Combat">
+        <HintPath>..\..\Libraries\Game Libraries\Noname.Worldless.Combat.dll</HintPath>
+        <Private>False</Private>
       </Reference>
       <Reference Include="UnityEngine">
-        <HintPath>..\..\Libraries\Unity\UnityEngine.dll</HintPath>
+        <HintPath>..\..\..\..\OneDrive\Desktop\Weird Steam Downloads\Modded Worldless\BepInEx\interop\UnityEngine.dll</HintPath>
+        <Private>False</Private>
       </Reference>
       <Reference Include="UnityEngine.CoreModule">
-        <HintPath>..\..\Libraries\Unity\UnityEngine.CoreModule.dll</HintPath>
+        <HintPath>..\..\..\..\OneDrive\Desktop\Weird Steam Downloads\Modded Worldless\BepInEx\interop\UnityEngine.CoreModule.dll</HintPath>
+        <Private>False</Private>
+      </Reference>
+      <Reference Include="__Generated">
+        <HintPath>..\..\..\..\OneDrive\Desktop\Weird Steam Downloads\Modded Worldless\BepInEx\interop\__Generated.dll</HintPath>
+        <Private>False</Private>
       </Reference>
     </ItemGroup>
 
