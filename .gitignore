@@ -1,7 +1,4 @@
-﻿## ==========================================
-## JetBrains Rider / IntelliJ Specific Files
-## ==========================================
-.idea/
+﻿.idea/
 *.sln.iml
 *.suo
 *.ntvsca.json
@@ -9,10 +6,7 @@
 *.user
 *.userosscache
 *.sln.docstates
-
-## ==========================================
-## .NET / C# Core Build Outputs
-## ==========================================
+*.log
 bin/
 obj/
 [Bb]in/
@@ -25,17 +19,9 @@ bxml/
 Build/
 Release/
 Debug/
-
-## ==========================================
-## Roslyn and MSBuild
-## ==========================================
 *.cs.analyzerdata
 *.precompiled
 *.bbl
-
-## ==========================================
-## User-Specific Settings & Local Overrides
-## ==========================================
 *.userprefs
 *.csproj.user
 *.pubxml.user
@@ -43,28 +29,16 @@ Debug/
 appsettings.Development.json
 appsettings.Local.json
 launchSettings.json
-
-## ==========================================
-## Test and Coverage Results
-## ==========================================
 TestResults/
 *.trx
 *.coverage
 *.coveragexml
 _Chutzpah*
 coverlet/
-
-## ==========================================
-## Package Manager Directories
-## ==========================================
 .nuget/
 packages/
 *.nuget.props
 *.nuget.targets
 node_modules/
-
-## ==========================================
-## OS Generated Files
-## ==========================================
 .DS_Store
 Thumbs.db
