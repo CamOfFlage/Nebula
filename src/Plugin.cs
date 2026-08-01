@@ -4,7 +4,6 @@ using BepInEx.Logging;
 using Il2CppInterop.Runtime.Injection;
 using UnityEngine;
 using Nebula.ResourceManager;
-using Logger = BepInEx.Logging.Logger;
 
 namespace Nebula
 {
@@ -21,7 +20,7 @@ namespace Nebula
             ClassInjector.RegisterTypeInIl2Cpp<ModdingGameManager>();
             ClassInjector.RegisterTypeInIl2Cpp<BootChecker>();
             
-            GameObject manager = new GameObject("WorldlessLibGameManager");
+            GameObject manager = new GameObject("NebulaGameManager");
             GameInfo.GameManager = manager;
             manager.hideFlags = HideFlags.HideAndDontSave;
             manager.AddComponent<ModdingGameManager>();
@@ -31,8 +30,8 @@ namespace Nebula
     
     public static class PluginInfo
     {
-        public const string PLUGIN_GUID = "com.CamOfFlage.WorldlessLib";
-        public const string PLUGIN_NAME = "WorldlessLib";
+        public const string PLUGIN_GUID = "com.CamOfFlage.Nebula";
+        public const string PLUGIN_NAME = "Nebula";
         public const string PLUGIN_VERSION = "0.0.1";
     }
 }
