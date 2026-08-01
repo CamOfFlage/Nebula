@@ -1,0 +1,13 @@
+# Nebula (A Worldless modding library)
+
+### Features:
+- Management for accessing the EVA system
+- Monitoring loading combat templates
+- Access to individual enemies
+
+### Getting Started
+- Download BepInEx
+- Launch the game once
+- Go to the BepInEx folders, the required game libraries are in core and interop
+- Add ``` [BepInDependency("com.CamOfFlage.Nebula")] ``` to your plugin's base class
+- That's it!
