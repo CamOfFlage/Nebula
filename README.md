@@ -9,5 +9,6 @@
 - Download BepInEx
 - Launch the game once
 - Go to the BepInEx folders, the required game libraries are in core and interop
+- Add a dependency to ``` Nebula.dll ``` (Found in the "Releases" section of the github page)
 - Add ``` [BepInDependency("com.CamOfFlage.Nebula")] ``` to your plugin's base class
 - That's it!
