@@ -1,4 +1,4 @@
-﻿namespace WorldlessLibs.ResourceManager;
+﻿namespace Nebula.ResourceManager;
 
 public class ResourceEvents
 {
@@ -6,8 +6,9 @@ public class ResourceEvents
 
     public static ResourceEvents Instance;
     
-    public virtual void OnAllTemplatesLoaded()
+    public void OnAllTemplatesLoaded()
     {
         AllTemplatesLoaded?.Invoke(this, EventArgs.Empty);
+        Plugin.logger.LogMessage("Templates loaded invoked!");
     }
 }

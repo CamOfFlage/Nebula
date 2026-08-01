@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace WorldlessLibs;
+namespace Nebula;
 
 public class BootChecker : MonoBehaviour
 {

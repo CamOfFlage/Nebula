@@ -1,7 +1,7 @@
 ﻿using Noname.Worldless.Combat;
 using UnityEngine;
 
-namespace WorldlessLibs.Combat;
+namespace Nebula.Combat;
 
 public class FighterManager
 {

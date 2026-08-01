@@ -1,19 +1,21 @@
-﻿using UnityEngine.Animations;
+﻿using Il2CppInterop.Runtime.InteropTypes.Arrays;
+using UnityEngine.Animations;
 
 using Noname;
 
-namespace WorldlessLibs.Eva;
+namespace Nebula.Eva;
 
 public class EvaTrackFetcher
 {
     public EvaTrack FetchTrack(EvaListener evaListener, String evaTrackType, String animationName, int _evaTrack)
     {
         EvaTracks evaTracks = null;
-        foreach (EvaTracks _evaTracks in evaListener.evaTracks)
+        Il2CppReferenceArray<EvaTracks> evaTracksArray = evaListener.evaTracks;
+        for (int i = 0; i < evaTracksArray.Length; i++)
         {
-            if (_evaTracks.name == evaTrackType)
+            if (evaTracksArray[i].name == evaTrackType)
             {
-                evaTracks = _evaTracks;
+                evaTracks = evaTracksArray[i];
                 break;
             }
         }

@@ -3,9 +3,10 @@ using BepInEx.Unity.IL2CPP;
 using BepInEx.Logging;
 using Il2CppInterop.Runtime.Injection;
 using UnityEngine;
+using Nebula.ResourceManager;
 using Logger = BepInEx.Logging.Logger;
 
-namespace WorldlessLibs
+namespace Nebula
 {
     [BepInPlugin(PluginInfo.PLUGIN_GUID, PluginInfo.PLUGIN_NAME, PluginInfo.PLUGIN_VERSION)]
     public class Plugin : BasePlugin
@@ -14,6 +15,7 @@ namespace WorldlessLibs
         
         public override void Load()
         {
+            ResourceEvents.Instance = new ResourceEvents();
             logger = Log;
             Log.LogMessage($"{PluginInfo.PLUGIN_NAME} loaded!");
             ClassInjector.RegisterTypeInIl2Cpp<ModdingGameManager>();

@@ -1,9 +1,9 @@
 ﻿using Il2CppInterop.Runtime;
 using UnityEngine;
 using Noname.Worldless.Combat;
-using WorldlessLibs.ResourceManager;
+using Nebula.ResourceManager;
 
-namespace WorldlessLibs;
+namespace Nebula;
 
 public class ModdingGameManager : MonoBehaviour
 {

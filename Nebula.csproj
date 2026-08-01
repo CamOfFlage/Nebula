@@ -4,6 +4,8 @@
         <TargetFramework>net6.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <AssemblyName>Nebula</AssemblyName>
+        <RootNamespace>Nebula</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
@@ -36,8 +38,7 @@
         <Private>False</Private>
       </Reference>
       <Reference Include="Noname">
-        <HintPath>..\..\Libraries\Game Libraries\Noname.dll</HintPath>
-        <Private>False</Private>
+        <HintPath>..\..\..\..\OneDrive\Desktop\Weird Steam Downloads\Modded Worldless\BepInEx\interop\Noname.dll</HintPath>
       </Reference>
       <Reference Include="Noname.Worldless.Combat">
         <HintPath>..\..\Libraries\Game Libraries\Noname.Worldless.Combat.dll</HintPath>
@@ -46,6 +47,9 @@
       <Reference Include="UnityEngine">
         <HintPath>..\..\..\..\OneDrive\Desktop\Weird Steam Downloads\Modded Worldless\BepInEx\interop\UnityEngine.dll</HintPath>
         <Private>False</Private>
+      </Reference>
+      <Reference Include="UnityEngine.AnimationModule">
+        <HintPath>..\..\..\..\OneDrive\Desktop\Weird Steam Downloads\Modded Worldless\BepInEx\interop\UnityEngine.AnimationModule.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine.CoreModule">
         <HintPath>..\..\..\..\OneDrive\Desktop\Weird Steam Downloads\Modded Worldless\BepInEx\interop\UnityEngine.CoreModule.dll</HintPath>
