@@ -1,8 +1,10 @@
 ﻿using BepInEx;
 using BepInEx.Unity.IL2CPP;
 using BepInEx.Logging;
+using HarmonyLib;
 using Il2CppInterop.Runtime.Injection;
 using Nebula.Combat;
+using Nebula.Patching;
 using UnityEngine;
 using Nebula.ResourceManager;
 using UnityEngine.SceneManagement;
@@ -31,6 +33,11 @@ namespace Nebula
             manager.hideFlags = HideFlags.HideAndDontSave;
             manager.AddComponent<ModdingGameManager>();
             manager.AddComponent<BootChecker>();
+            
+            CombatTemplatePatchHandler.instance = new CombatTemplatePatchHandler();
+            
+            Harmony harmony = new Harmony(PluginInfo.PLUGIN_GUID);
+            harmony.PatchAll();
         }
     }
 
