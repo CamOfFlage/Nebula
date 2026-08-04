@@ -17,9 +17,8 @@ namespace Nebula
         public override void Load()
         {
             ResourceEvents.Instance = new ResourceEvents();
-            GameInfo.CombatSystem = GameObject.Find("CombatSystem(Clone)");
-            GameInfo.NavigationSystem = GameObject.Find("NavigationSystem(Clone)");
-            GameInfo.LoadedTemplates = new LoadedTemplates();
+            //GameInfo.CombatSystem = GameObject.Find("CombatSystem(Clone)");
+            //GameInfo.NavigationSystem = GameObject.Find("NavigationSystem(Clone)");
             
             logger = Log;
             Log.LogMessage($"{PluginInfo.PLUGIN_NAME} loaded!");
@@ -32,9 +31,6 @@ namespace Nebula
             manager.hideFlags = HideFlags.HideAndDontSave;
             manager.AddComponent<ModdingGameManager>();
             manager.AddComponent<BootChecker>();
-            
-            SceneManager.sceneLoaded += (Action<Scene, LoadSceneMode>)GameInfo.LoadedTemplates.OnSceneLoad;
-            ResourceEvents.Instance.AllTemplatesLoaded += GameInfo.LoadedTemplates.OnSceneLoad;
         }
     }
 
