@@ -35,6 +35,7 @@ namespace Nebula
             manager.AddComponent<BootChecker>();
             
             CombatTemplatePatchHandler.instance = new CombatTemplatePatchHandler();
+            ProjectilePatchHandler.instance = new ProjectilePatchHandler();
             
             Harmony harmony = new Harmony(PluginInfo.PLUGIN_GUID);
             harmony.PatchAll();

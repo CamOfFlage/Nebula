@@ -2,5 +2,5 @@
 
 public abstract class PatchHandler
 {
-    public abstract List<NebulaPatch> patches { get; set; }
+    public List<NebulaPatch> patches { get; set; } = new List<NebulaPatch>();
 }

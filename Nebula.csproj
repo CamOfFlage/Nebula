@@ -61,4 +61,8 @@
       </Reference>
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="src\Eva\Hooks\" />
+    </ItemGroup>
+
 </Project>

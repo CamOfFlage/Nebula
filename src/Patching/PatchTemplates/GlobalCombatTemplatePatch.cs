@@ -6,8 +6,8 @@ namespace Nebula.PatchTemplates;
 
 public abstract class GlobalCombatTemplatePatch : NebulaPatch
 {
-    public abstract String templateId { get; }
-    public PatchHandler patchHandler = CombatTemplatePatchHandler.instance;
+    public virtual String templateId { get; }
+    public override PatchHandler patchHandler { get; } = CombatTemplatePatchHandler.instance;
 
     public abstract void Patch(CombatTemplate combatTemplate);
 }
