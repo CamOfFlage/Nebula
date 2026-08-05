@@ -13,6 +13,8 @@ public class EvaTrackFetcher
         Il2CppReferenceArray<EvaTracks> evaTracksArray = evaListener.evaTracks;
         for (int i = 0; i < evaTracksArray.Length; i++)
         {
+            Plugin.logger.LogMessage(evaTracksArray[i].name);
+            Plugin.logger.LogMessage(evaTrackType);
             if (evaTracksArray[i].name == evaTrackType)
             {
                 evaTracks = evaTracksArray[i];
@@ -22,7 +24,7 @@ public class EvaTrackFetcher
 
         if (evaTracks == null)
         {
-            throw new NullReferenceException(); //Todo: Add a custom exception here later
+            throw new Exception("No EVA tracks found");
         }
 
         AnimationTracks[] animationTracksArray = evaTracks.animationTracks.ToArray();
@@ -36,6 +38,7 @@ public class EvaTrackFetcher
         AnimationTracks animationTracks = animationTracksMap[animationName];
 
         EvaTrack evaTrack = animationTracks.tracks[_evaTrack];
+        Plugin.logger.LogMessage(evaTrack.name);
         return evaTrack;
     }
 }

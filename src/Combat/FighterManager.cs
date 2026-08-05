@@ -1,4 +1,5 @@
-﻿using Noname.Worldless.Combat;
+﻿using Noname;
+using Noname.Worldless.Combat;
 using UnityEngine;
 
 namespace Nebula.Combat;
@@ -12,11 +13,27 @@ public class FighterManager
         this.fighter = fighter;
     }
 
-    public GameObject getModel(String modelName)
+    public GameObject getModel()
     {
+        /*
         GameObject fighterGameObject = fighter.gameObject;
-        GameObject models = fighterGameObject.transform.FindChild("Model").gameObject;
-        GameObject modelGameObject = models.transform.FindChild( modelName).gameObject;
-        return modelGameObject;
+        Transform modelsTransform = fighterGameObject.transform.FindChild("Model");
+        if (modelsTransform == null)
+        {
+            Plugin.logger.LogError("Model transform not found");
+        }
+        GameObject models = modelsTransform.gameObject;
+        if (models == null)
+        {
+            Plugin.logger.LogError("Model not found");
+        }
+        GameObject modelGameObject = models.transform.FindChild(modelName).gameObject;
+        if (modelGameObject == null)
+        {
+            Plugin.logger.LogError("Model is null");
+        }
+        */
+        Model model = fighter.model;
+        return model.gameObject;
     }
 }

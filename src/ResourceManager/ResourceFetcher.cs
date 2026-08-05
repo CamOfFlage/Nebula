@@ -14,14 +14,17 @@ public class ResourceFetcher<T>
         }
     }
 
-    public GameObject? Fetch(string name)
+    public GameObject Fetch(string name)
     {
         GameObject[] objects = Resources.FindObjectsOfTypeAll<GameObject>();
         List<GameObject> gameObjects = new List<GameObject>();
         foreach (GameObject go in objects)
         {
-            if (go.name == name && go.GetComponent<T>() != null && 
-                (go.hideFlags.HasFlag(HideFlags.HideInHierarchy) || !go.scene.IsValid()))
+            if (!go.scene.IsValid())
+            {
+                Plugin.logger.LogMessage(go.name);
+            }
+            if (go.name == name && go.GetComponent<T>() != null && !go.scene.IsValid())
             {
                 gameObjects.Add(go);
             }
@@ -29,7 +32,7 @@ public class ResourceFetcher<T>
 
         if (gameObjects.Count == 0)
         {
-            return null;
+            throw new Exception("No Resources found");
         }
         return gameObjects.FirstOrDefault();
     }

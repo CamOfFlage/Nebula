@@ -10,5 +10,4 @@ public static class GameInfo
     public static GameObject GameManager;
     public static GameObject CombatSystem;
     public static GameObject NavigationSystem;
-    public static LoadedTemplates LoadedTemplates;
 }

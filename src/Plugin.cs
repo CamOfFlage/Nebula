@@ -1,8 +1,10 @@
 ﻿using BepInEx;
 using BepInEx.Unity.IL2CPP;
 using BepInEx.Logging;
+using HarmonyLib;
 using Il2CppInterop.Runtime.Injection;
 using Nebula.Combat;
+using Nebula.Patching;
 using UnityEngine;
 using Nebula.ResourceManager;
 using UnityEngine.SceneManagement;
@@ -17,9 +19,8 @@ namespace Nebula
         public override void Load()
         {
             ResourceEvents.Instance = new ResourceEvents();
-            GameInfo.CombatSystem = GameObject.Find("CombatSystem(Clone)");
-            GameInfo.NavigationSystem = GameObject.Find("NavigationSystem(Clone)");
-            GameInfo.LoadedTemplates = new LoadedTemplates();
+            //GameInfo.CombatSystem = GameObject.Find("CombatSystem(Clone)");
+            //GameInfo.NavigationSystem = GameObject.Find("NavigationSystem(Clone)");
             
             logger = Log;
             Log.LogMessage($"{PluginInfo.PLUGIN_NAME} loaded!");
@@ -33,8 +34,11 @@ namespace Nebula
             manager.AddComponent<ModdingGameManager>();
             manager.AddComponent<BootChecker>();
             
-            SceneManager.sceneLoaded += (Action<Scene, LoadSceneMode>)GameInfo.LoadedTemplates.OnSceneLoad;
-            ResourceEvents.Instance.AllTemplatesLoaded += GameInfo.LoadedTemplates.OnSceneLoad;
+            CombatTemplatePatchHandler.instance = new CombatTemplatePatchHandler();
+            ProjectilePatchHandler.instance = new ProjectilePatchHandler();
+            
+            Harmony harmony = new Harmony(PluginInfo.PLUGIN_GUID);
+            harmony.PatchAll();
         }
     }
 
