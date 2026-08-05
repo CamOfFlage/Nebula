@@ -4,6 +4,7 @@
 - Management for accessing the EVA system
 - Monitoring loading combat templates
 - Access to individual enemies
+- Tools for projectile management
 
 ### Getting Started
 - Download BepInEx
