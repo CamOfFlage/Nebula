@@ -46,7 +46,20 @@ public class SeraphPatches : GlobalCombatTemplatePatch
 		 hit.damage = 6;  
 		 hit.stagger = 2;  
 	  }
-	}  
+	}
+
+	//Blocks
+	BlocksHandler blocksHandler = combatTemplate.enemy.blocksHandler;
+    BlockSet blockSet01 = new BlockSet();
+    blockSet01.blockDefs = new Il2CppReferenceArray<BlockDef>(2);
+    blockSet01.blockDefs[0] = new BlockDef(BlockType.PhysicalAny, 10);
+    blockSet01.blockDefs[1] = new BlockDef(BlockType.Fire, 10);
+    BlockSet blockSet02 = new BlockSet();
+    blockSet02.blockDefs = new Il2CppReferenceArray<BlockDef>(2);
+    blockSet02.blockDefs[0] = new BlockDef(BlockType.PhysicalAny, 10);
+    blockSet02.blockDefs[1] = new BlockDef(BlockType.Wind, 10);
+    blocksHandler._blockSets[0] = blockSet01;
+    blocksHandler._blockSets[1] = blockSet02;  
 }
 ```
 ```C#
