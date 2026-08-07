@@ -13,3 +13,51 @@
 - Add a dependency to ``` Nebula.dll ``` (Found in the "Releases" section of the github page)
 - Add ``` [BepInDependency("com.CamOfFlage.Nebula")] ``` to your plugin's base class
 - That's it!
+
+### Examples
+Note: These examples just serve as a basic reference, and will be removed once the example project has been set up
+``` C#
+public class SeraphPatches : GlobalCombatTemplatePatch  
+{
+  public override void Patch() { }  
+  public override string templateId { get; } = "Seraph";  
+  public override string patchId { get; } = "SeraphPatch";  
+  public override void Patch(CombatTemplate combatTemplate)  
+	 {  
+		 EvaListener listener = combatTemplate.enemy._fighter.model.gameObject.GetComponent<EvaListener>();
+		 EvaTrackFetcher fetcher = new EvaTrackFetcher();  
+  
+	  EvaTrack attack01Track = fetcher.FetchTrack(listener, "seraph", "seraph_attack01", 1);  
+	  ProjectileClip projectileClip = attack01Track.clips[0].TryCast<ProjectileClip>();  
+	  AddressableKey addressableKey = projectileClip.addressableKey;  
+	  ProjectileFetcher projectileFetcher = new ProjectileFetcher();  
+	  GameObject projectileObject = projectileFetcher.fetchProjectile(addressableKey);  
+	  EvaTrack projectileTrack = fetcher.FetchTrack(projectileObject.GetComponent<EvaListener>(), "seraph_attack01_laser", "adaptation_dark_laser_weak", 0);  
+	  Hit projectileHit = projectileTrack.clips[0].TryCast<HitClip>().hit;  
+	  projectileHit.damage = 6;  
+	  projectileHit.stagger = 2;
+
+	  EvaTrack attack02Track = fetcher.FetchTrack(listener, "seraph", "seraph_attack02", 1);  
+	  Il2CppSystem.Collections.Generic.List<EvaClip> hitClips = attack02Track.clips;  
+	  foreach (EvaClip clip in hitClips)  
+	  {
+		 HitClip hitClip = clip.TryCast<HitClip>();  
+		 Hit hit = hitClip.hit;  
+		 hit.damage = 6;  
+		 hit.stagger = 2;  
+	  }
+	}  
+}
+```
+```C#
+[BepInPlugin("com.CamOfFlage.NebulaTest", "NebulaTest", "1.0.0")]  
+[BepInDependency("com.CamOfFlage.Nebula")]  
+public class Plugin : BasePlugin  
+{  
+  public override void Load()  
+ {  
+	 SeraphPatches seraphPatches = new SeraphPatches();
+	 seraphPatches.Register();    
+  }  
+}
+```
