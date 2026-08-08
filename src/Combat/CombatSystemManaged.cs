@@ -9,7 +9,8 @@ public class CombatSystemManaged
     public FighterAven aven;
     public FighterEdda edda;
     public Dictionary<CombatSkill.Skill, CombatSkill> skillTreeSkills;
-
+    public CombatSkillManager skillManager;
+    
     public int darkEssence
     {
         get
@@ -108,5 +109,6 @@ public class CombatSystemManaged
         aven = combatSystem.transform.FindChild("FighterAven").GetComponent<FighterAven>();
         edda = combatSystem.transform.FindChild("FighterEdda").GetComponent<FighterEdda>();
         skillTreeSkills = combatSystem.progression.skills._combatSkillsDictionary._dict;
+        skillManager = new CombatSkillManager(combatSystem.progression.skills);
     }
 }
