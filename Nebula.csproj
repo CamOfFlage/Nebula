@@ -40,7 +40,10 @@
       <Reference Include="Noname">
         <HintPath>..\..\..\..\OneDrive\Desktop\Weird Steam Downloads\Modded Worldless\BepInEx\interop\Noname.dll</HintPath>
       </Reference>
-      <Reference Include="Noname.Worldless.Combat">
+      <Reference Include="Noname.Worldless">
+        <HintPath>..\..\..\..\OneDrive\Desktop\Weird Steam Downloads\Modded Worldless\BepInEx\interop\Noname.Worldless.dll</HintPath>
+      </Reference>
+      <Reference Include="Noname.Worldless.Combat" Publicize="True">
         <HintPath>..\..\Libraries\Game Libraries\Noname.Worldless.Combat.dll</HintPath>
         <Private>False</Private>
       </Reference>
@@ -64,6 +67,13 @@
     <ItemGroup>
       <Folder Include="src\Eva\Hooks\" />
       <Folder Include="src\Navigation\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="BepInEx.AssemblyPublicizer.MSBuild" Version="0.5.0-beta.2">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
     </ItemGroup>
 
 </Project>
