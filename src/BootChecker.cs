@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Nebula.Combat;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace Nebula;
@@ -12,6 +13,9 @@ public class BootChecker : MonoBehaviour
         if (SceneManager.GetActiveScene().name != "Boot")
         {
             GameInfo.IsBooted = true;
+            GameInfo.CombatSystem = GameObject.Find("CombatSystem(Clone)");
+            CombatSystemPatchHandler.Instance.PatchCombat();
+            GameInfo.NavigationSystem = GameObject.Find("NavigationSystem(Clone)");
             Destroy(this);
         }
     }

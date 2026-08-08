@@ -19,8 +19,6 @@ namespace Nebula
         public override void Load()
         {
             ResourceEvents.Instance = new ResourceEvents();
-            //GameInfo.CombatSystem = GameObject.Find("CombatSystem(Clone)");
-            //GameInfo.NavigationSystem = GameObject.Find("NavigationSystem(Clone)");
             
             logger = Log;
             Log.LogMessage($"{PluginInfo.PLUGIN_NAME} loaded!");

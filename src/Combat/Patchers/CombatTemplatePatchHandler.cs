@@ -1,5 +1,5 @@
 ﻿using Nebula.Patching;
-using Nebula.PatchTemplates;
+using Nebula.Combat;
 using Noname.Worldless.Combat;
 
 namespace Nebula.Combat;
@@ -16,7 +16,7 @@ public class CombatTemplatePatchHandler : PatchHandler
             GlobalCombatTemplatePatch patch = nebulaPatch as GlobalCombatTemplatePatch;
             if (patch == null)
             {
-                patches.Remove(patch);
+                patches.Remove(nebulaPatch);
                 Plugin.logger.LogError($"Patch {nebulaPatch.patchId} is not a GlobalCombatTemplatePatch");
             }
 

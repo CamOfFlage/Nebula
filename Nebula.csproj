@@ -63,6 +63,7 @@
 
     <ItemGroup>
       <Folder Include="src\Eva\Hooks\" />
+      <Folder Include="src\Navigation\" />
     </ItemGroup>
 
 </Project>

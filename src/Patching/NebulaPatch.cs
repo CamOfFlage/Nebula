@@ -4,10 +4,8 @@ namespace Nebula;
 
 public abstract class NebulaPatch
 {
-    public abstract void Patch();
-
-    public virtual String patchId { get; }
-    public virtual PatchHandler patchHandler { get; }
+    public abstract String patchId { get; }
+    public abstract PatchHandler patchHandler { get; }
     
     public void Register()
     {
