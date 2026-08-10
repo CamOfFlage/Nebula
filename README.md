@@ -74,3 +74,10 @@ public class Plugin : BasePlugin
   }  
 }
 ```
+
+## Bug Reporting
+All official bug reports should be handled through the GitHub issues system. Try to make sure that the issue is with Nebula itself, and not from either your own code or the game.
+
+Any suggestions should either be sent as a "Enhancement" through issues. Alternatively, you could send suggestions through the Discord modding channel. 
+
+Any personal usage issues or confusion are not bugs, and should not be reported as such. Instead, ask for help in the Discord and feel free to update the documentation later!
