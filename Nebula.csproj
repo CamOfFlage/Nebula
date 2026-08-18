@@ -43,9 +43,8 @@
       <Reference Include="Noname.Worldless">
         <HintPath>..\..\..\..\OneDrive\Desktop\Weird Steam Downloads\Modded Worldless\BepInEx\interop\Noname.Worldless.dll</HintPath>
       </Reference>
-      <Reference Include="Noname.Worldless.Combat" Publicize="True">
-        <HintPath>..\..\Libraries\Game Libraries\Noname.Worldless.Combat.dll</HintPath>
-        <Private>False</Private>
+      <Reference Include="Noname.Worldless.Combat">
+        <HintPath>..\..\..\..\OneDrive\Desktop\Weird Steam Downloads\Modded Worldless\BepInEx\interop\Noname.Worldless.Combat.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine">
         <HintPath>..\..\..\..\OneDrive\Desktop\Weird Steam Downloads\Modded Worldless\BepInEx\interop\UnityEngine.dll</HintPath>

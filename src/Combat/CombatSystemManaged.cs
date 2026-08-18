@@ -8,7 +8,7 @@ public class CombatSystemManaged
     public CombatSystem combatSystem;
     public FighterAven aven;
     public FighterEdda edda;
-    public Dictionary<CombatSkill.Skill, CombatSkill> skillTreeSkills;
+    public Il2CppSystem.Collections.Generic.Dictionary<CombatSkill.Skill, CombatSkill> skillTreeSkills;
     public CombatSkillManager skillManager;
     
     public int darkEssence
