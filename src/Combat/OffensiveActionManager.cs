@@ -10,13 +10,14 @@ public class OffensiveActionManager
     public OffensiveAction OffensiveAction;
     public Attack[] Attacks;
     private Fighter fighter;
-    public FighterManager fighterManager;
+    private FighterManager fighterManager;
     
     public OffensiveActionManager(OffensiveAction offensiveAction)
     {
         this.OffensiveAction = offensiveAction;
         fighter = OffensiveAction._fighter;
         fighterManager = new FighterManager(fighter);
+        Attacks = Attack.GetAttacks(OffensiveAction);
     }
 
     public OffensiveActionManager(Fighter fighter, AnimationTracks animationTracks)
@@ -24,6 +25,7 @@ public class OffensiveActionManager
         this.fighter = fighter;
         fighterManager = new FighterManager(fighter);
         OffensiveAction = GetOffensiveActionFromAnim(animationTracks.clip);
+        Attacks = Attack.GetAttacks(OffensiveAction);
     }
 
     public OffensiveActionManager(Fighter fighter, String attackName) //Attack name is the one from the relevant "OffensiveAction"
@@ -31,6 +33,7 @@ public class OffensiveActionManager
         this.fighter = fighter;
         fighterManager = new FighterManager(fighter);
         OffensiveAction = FindOffensiveActionByName(attackName);
+        Attacks = Attack.GetAttacks(OffensiveAction);
     }
 
     public OffensiveActionManager(FighterManager fighterManager, AnimationTracks animationTracks)
@@ -38,6 +41,7 @@ public class OffensiveActionManager
         fighter = fighterManager.fighter;
         fighterManager = new FighterManager(fighter);
         OffensiveAction = GetOffensiveActionFromAnim(animationTracks.clip);
+        Attacks = Attack.GetAttacks(OffensiveAction);
     }
 
     public OffensiveActionManager(FighterManager fighterManager, String attackName)
@@ -45,14 +49,8 @@ public class OffensiveActionManager
         fighter = fighterManager.fighter;
         fighterManager = new FighterManager(fighter);
         OffensiveAction = FindOffensiveActionByName(attackName);
+        Attacks = Attack.GetAttacks(OffensiveAction);
     }
-
-    /*
-    private Attack[] GetAttacks()
-    {
-        List<Attack> attacks = new List<Attack>();
-    }
-    */
 
     private OffensiveAction FindOffensiveActionByName(string name)
     {
