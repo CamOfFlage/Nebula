@@ -4,24 +4,35 @@ using UnityEngine;
 
 namespace Nebula.Combat;
 
-public class Attack
+public class AttackManager
 {
     private EvaTrack[] evaTracks;
-    public Attack(EvaListener evaListener, AnimationClip animationClip)
+    public string attackName;
+    public AnimationClip animationClip;
+    public HitClip[] hitClips;
+    public EffectClip[] warnings;
+    public EffectClip[] effects;
+    //SFX
+    //Projectiles
+    
+    public AttackManager(EvaListener evaListener, AnimationClip animationClip)
     {
         evaTracks = GetEvaTracks(evaListener, animationClip);
+        this.animationClip = animationClip;
+        hitClips = getAllTracksOfType<HitClip>();
+        attackName = animationClip.name;
     }
 
-    public static Attack[] GetAttacks(OffensiveAction offensiveAction)
+    public static AttackManager[] GetAttacks(OffensiveAction offensiveAction)
     {
         Fighter fighter = offensiveAction._fighter;
         FighterManager fighterManager = new FighterManager(fighter);
         EvaListener evaListener = fighter._evaListener;
-        List<Attack> attacks = new List<Attack>();
+        List<AttackManager> attacks = new List<AttackManager>();
         AnimationClip[] animationClips = GetAnimClipsFromOffensiveAction(offensiveAction, fighterManager);
         foreach (AnimationClip animationClip in animationClips)
         {
-            attacks.Add(new Attack(evaListener, animationClip));
+            attacks.Add(new AttackManager(evaListener, animationClip));
         }
         return attacks.ToArray();
     }
@@ -33,7 +44,7 @@ public class Attack
         {
             foreach (AnimationTracks animationTracks in evaTracks.animationTracks)
             {
-                if (animationTracks.clip.name == animClip.name)
+                if (animationTracks.clip.name.Equals(animClip.name))
                 {
                     foreach (EvaTrack track in animationTracks.tracks)
                     {
@@ -45,18 +56,36 @@ public class Attack
         return tracks.ToArray();
     }
 
+    private T[] getAllTracksOfType<T>() where T : EvaClip<T>
+    {
+        List<T> tracks = new List<T>();
+        foreach (EvaTrack evaTrack in evaTracks)
+        {
+            foreach (EvaClip evaClip in evaTrack.clips)
+            {
+                if (evaClip.TryCast<T>() != null)
+                {
+                    tracks.Add(evaClip.TryCast<T>());
+                }
+            }
+        }
+        return tracks.ToArray();
+    }
+    
     private static AnimationClip[] GetAnimClipsFromOffensiveAction(OffensiveAction offensiveAction, FighterManager fighter)
     {
         StyleHandler styleHandler = fighter.GetComponent<StyleHandler>();
         List<AnimationClip> clips = new List<AnimationClip>();
         if (styleHandler != null) //Only players have StyleHandler
         {
-            Plugin.logger.LogMessage("StyleHandler found");
             foreach (AttackAbsorbParams attackAbsorbParams in styleHandler._attackAbsorbParams)
             {
-                foreach (AnimationClip animationClip in attackAbsorbParams.attacks)
+                if (attackAbsorbParams.name.Equals(offensiveAction.name, StringComparison.InvariantCultureIgnoreCase))
                 {
-                    clips.Add(animationClip);
+                    foreach (AnimationClip animationClip in attackAbsorbParams.attacks)
+                    {
+                        clips.Add(animationClip);
+                    }
                 }
             }
         }

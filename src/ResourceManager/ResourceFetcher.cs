@@ -24,7 +24,7 @@ public class ResourceFetcher<T>
             {
                 Plugin.logger.LogMessage(go.name);
             }
-            if (go.name == name && go.GetComponent<T>() != null && !go.scene.IsValid())
+            if (go.name.Equals(name) && go.GetComponent<T>() != null && !go.scene.IsValid())
             {
                 gameObjects.Add(go);
             }

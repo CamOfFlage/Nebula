@@ -8,16 +8,16 @@ namespace Nebula.Combat;
 public class OffensiveActionManager
 {
     public OffensiveAction OffensiveAction;
-    public Attack[] Attacks;
+    public AttackManager[] Attacks;
     private Fighter fighter;
-    private FighterManager fighterManager;
+    public FighterManager fighterManager;
     
     public OffensiveActionManager(OffensiveAction offensiveAction)
     {
         this.OffensiveAction = offensiveAction;
         fighter = OffensiveAction._fighter;
         fighterManager = new FighterManager(fighter);
-        Attacks = Attack.GetAttacks(OffensiveAction);
+        Attacks = AttackManager.GetAttacks(OffensiveAction);
     }
 
     public OffensiveActionManager(Fighter fighter, AnimationTracks animationTracks)
@@ -25,7 +25,7 @@ public class OffensiveActionManager
         this.fighter = fighter;
         fighterManager = new FighterManager(fighter);
         OffensiveAction = GetOffensiveActionFromAnim(animationTracks.clip);
-        Attacks = Attack.GetAttacks(OffensiveAction);
+        Attacks = AttackManager.GetAttacks(OffensiveAction);
     }
 
     public OffensiveActionManager(Fighter fighter, String attackName) //Attack name is the one from the relevant "OffensiveAction"
@@ -33,7 +33,7 @@ public class OffensiveActionManager
         this.fighter = fighter;
         fighterManager = new FighterManager(fighter);
         OffensiveAction = FindOffensiveActionByName(attackName);
-        Attacks = Attack.GetAttacks(OffensiveAction);
+        Attacks = AttackManager.GetAttacks(OffensiveAction);
     }
 
     public OffensiveActionManager(FighterManager fighterManager, AnimationTracks animationTracks)
@@ -41,7 +41,7 @@ public class OffensiveActionManager
         fighter = fighterManager.fighter;
         fighterManager = new FighterManager(fighter);
         OffensiveAction = GetOffensiveActionFromAnim(animationTracks.clip);
-        Attacks = Attack.GetAttacks(OffensiveAction);
+        Attacks = AttackManager.GetAttacks(OffensiveAction);
     }
 
     public OffensiveActionManager(FighterManager fighterManager, String attackName)
@@ -49,7 +49,7 @@ public class OffensiveActionManager
         fighter = fighterManager.fighter;
         fighterManager = new FighterManager(fighter);
         OffensiveAction = FindOffensiveActionByName(attackName);
-        Attacks = Attack.GetAttacks(OffensiveAction);
+        Attacks = AttackManager.GetAttacks(OffensiveAction);
     }
 
     private OffensiveAction FindOffensiveActionByName(string name)
@@ -63,7 +63,7 @@ public class OffensiveActionManager
 
         foreach (OffensiveAction offensiveAction in offensiveActions)
         {
-            if (offensiveAction.name == name)
+            if (offensiveAction.name.Equals(name))
             {
                 return offensiveAction;
             }
@@ -83,7 +83,7 @@ public class OffensiveActionManager
             {
                 foreach (AnimationClip animationClip in attackAbsorbParams.attacks)
                 {
-                    if (animationClip.name == animName)
+                    if (animationClip.name.Equals(animName))
                     {
                         return FindOffensiveActionByName(attackAbsorbParams.name);
                     }
@@ -99,4 +99,13 @@ public class OffensiveActionManager
         }
     }
 
+    public static OffensiveActionManager[] GetAllOffensiveActions(Fighter fighter)
+    {
+        List<OffensiveActionManager> offensiveActionManagers = new List<OffensiveActionManager>();
+        foreach (OffensiveAction offensiveAction in fighter.offensiveHandler._actions.actions)
+        {
+            offensiveActionManagers.Add(new OffensiveActionManager(offensiveAction));
+        }
+        return offensiveActionManagers.ToArray();
+    }
 }

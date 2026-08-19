@@ -33,13 +33,10 @@ namespace Nebula
             manager.AddComponent<BootChecker>();
             
             CombatTemplatePatchHandler.instance = new CombatTemplatePatchHandler();
-            
-            Harmony harmony = new Harmony(PluginInfo.PLUGIN_GUID);
-            harmony.PatchAll();
         }
     }
 
-    public static class PluginInfo
+    internal static class PluginInfo
     {
         public const string PLUGIN_GUID = "com.CamOfFlage.Nebula";
         public const string PLUGIN_NAME = "Nebula";

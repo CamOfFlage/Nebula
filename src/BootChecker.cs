@@ -1,4 +1,5 @@
-﻿using Nebula.Combat;
+﻿using HarmonyLib;
+using Nebula.Combat;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -12,10 +13,21 @@ public class BootChecker : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name != "Boot")
         {
-            GameInfo.IsBooted = true;
-            GameInfo.CombatSystem = GameObject.Find("CombatSystem(Clone)");
-            CombatSystemPatchHandler.Instance.PatchCombat();
-            GameInfo.NavigationSystem = GameObject.Find("NavigationSystem(Clone)");
+            Harmony harmony = new Harmony(PluginInfo.PLUGIN_GUID);
+            harmony.PatchAll();
+            try
+            {
+                GameInfo.IsBooted = true;
+                GameInfo.CombatSystem = GameObject.Find("CombatSystem(Clone)");
+                CombatSystemPatchHandler.Instance.PatchCombat();
+                GameInfo.NavigationSystem = GameObject.Find("NavigationSystem(Clone)");
+            }
+            catch (Exception e)
+            {
+                Plugin.logger.LogError("Encountered errors whilst patching the combatSystem, this will likely impact gameplay. Some, or all, mods may not work");
+                Plugin.logger.LogError($"Error: {e}");
+            }
+
             Destroy(this);
         }
     }

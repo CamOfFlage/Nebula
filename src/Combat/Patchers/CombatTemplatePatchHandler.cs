@@ -20,7 +20,7 @@ public class CombatTemplatePatchHandler : PatchHandler
                 Plugin.logger.LogError($"Patch {nebulaPatch.patchId} is not a GlobalCombatTemplatePatch");
             }
 
-            if (patch.templateId == combatTemplate.id)
+            if (patch.templateId.Equals(combatTemplate.id))
             {
                 patch.Patch(combatTemplate);
             }

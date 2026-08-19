@@ -15,7 +15,7 @@ public class EvaTrackFetcher
         {
             Plugin.logger.LogMessage(evaTracksArray[i].name);
             Plugin.logger.LogMessage(evaTrackType);
-            if (evaTracksArray[i].name == evaTrackType)
+            if (evaTracksArray[i].name.Equals(evaTrackType))
             {
                 evaTracks = evaTracksArray[i];
                 break;
@@ -40,5 +40,52 @@ public class EvaTrackFetcher
         EvaTrack evaTrack = animationTracks.tracks[_evaTrack];
         Plugin.logger.LogMessage(evaTrack.name);
         return evaTrack;
+    }
+
+    public EvaTrack FetchTrack(EvaListener evaListener, String animationName, String evaTrackType)
+    {
+        foreach (AnimationTracks animationTracks in GetAllAnimationTracks(evaListener))
+        {
+            if (animationTracks.clip.name.Equals(animationName))
+            {
+                foreach (EvaTrack evaTrack in animationTracks.tracks)
+                {
+                    if (evaTrack.name.Equals(evaTrackType))
+                    {
+                        return evaTrack;
+                    }
+                }
+            }
+        }
+        throw new Exception("No EVA tracks found");
+    }
+
+    public EvaTrack[] FetchTracks(EvaListener evaListener, String animationName)
+    {
+        List<EvaTrack> evaTracks = new List<EvaTrack>();
+        foreach (AnimationTracks animationTracks in GetAllAnimationTracks(evaListener))
+        {
+            if (animationTracks.clip.name.Equals(animationName))
+            {
+                foreach (EvaTrack evaTrack in animationTracks.tracks)
+                {
+                    evaTracks.Add(evaTrack);
+                }
+            }
+        }
+        return evaTracks.ToArray();
+    }
+
+    private AnimationTracks[] GetAllAnimationTracks(EvaListener evaListener)
+    {
+        List<AnimationTracks> animationTracksList = new List<AnimationTracks>();
+        foreach (EvaTracks evaTracks in evaListener.evaTracks)
+        {
+            foreach (AnimationTracks animTracks in evaTracks.animationTracks)
+            {
+                animationTracksList.Add(animTracks);
+            }
+        }
+        return animationTracksList.ToArray();
     }
 }
