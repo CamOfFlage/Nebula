@@ -8,14 +8,19 @@ namespace Nebula.Combat;
 public class FighterManager
 {
     public Fighter fighter { get; private set; }
+    public EvaListener EvaListener;
+    public Dictionary<string, OffensiveActionManager> offensiveActions = new Dictionary<string, OffensiveActionManager>();
 
     public FighterManager(Fighter fighter)
     {
         this.fighter = fighter;
-        EvaListener = getModel().GetComponent<EvaListener>();
+        EvaListener = fighter.evaListener;
+        OffensiveActionManager[] _offensiveActions = OffensiveActionManager.GetAllOffensiveActions(fighter);
+        foreach (OffensiveActionManager offensiveAction in _offensiveActions)
+        {
+            offensiveActions.Add(offensiveAction.OffensiveAction.name, offensiveAction);
+        }
     }
-
-    public EvaListener EvaListener;
 
     public GameObject getModel()
     {

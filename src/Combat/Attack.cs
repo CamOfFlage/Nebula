@@ -26,10 +26,9 @@ public class AttackManager
     public static AttackManager[] GetAttacks(OffensiveAction offensiveAction)
     {
         Fighter fighter = offensiveAction._fighter;
-        FighterManager fighterManager = new FighterManager(fighter);
         EvaListener evaListener = fighter._evaListener;
         List<AttackManager> attacks = new List<AttackManager>();
-        AnimationClip[] animationClips = GetAnimClipsFromOffensiveAction(offensiveAction, fighterManager);
+        AnimationClip[] animationClips = GetAnimClipsFromOffensiveAction(offensiveAction, fighter);
         foreach (AnimationClip animationClip in animationClips)
         {
             attacks.Add(new AttackManager(evaListener, animationClip));
@@ -72,7 +71,7 @@ public class AttackManager
         return tracks.ToArray();
     }
     
-    private static AnimationClip[] GetAnimClipsFromOffensiveAction(OffensiveAction offensiveAction, FighterManager fighter)
+    private static AnimationClip[] GetAnimClipsFromOffensiveAction(OffensiveAction offensiveAction, Fighter fighter)
     {
         StyleHandler styleHandler = fighter.GetComponent<StyleHandler>();
         List<AnimationClip> clips = new List<AnimationClip>();
@@ -91,7 +90,7 @@ public class AttackManager
         }
         else //Enemy naming is more straight-forward
         {
-            foreach (EvaTracks evaTracks in fighter.EvaListener.evaTracks)
+            foreach (EvaTracks evaTracks in fighter.evaListener.evaTracks)
             {
                 foreach (AnimationTracks animationTracks in evaTracks.animationTracks)
                 {

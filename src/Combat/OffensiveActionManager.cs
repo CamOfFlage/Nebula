@@ -10,39 +10,38 @@ public class OffensiveActionManager
     public OffensiveAction OffensiveAction;
     public AttackManager[] Attacks;
     private Fighter fighter;
-    public FighterManager fighterManager;
     
     public OffensiveActionManager(OffensiveAction offensiveAction)
     {
         this.OffensiveAction = offensiveAction;
         fighter = OffensiveAction._fighter;
-        fighterManager = new FighterManager(fighter);
         Attacks = AttackManager.GetAttacks(OffensiveAction);
     }
 
+    /*
     public OffensiveActionManager(Fighter fighter, AnimationTracks animationTracks)
     {
         this.fighter = fighter;
-        fighterManager = new FighterManager(fighter);
         OffensiveAction = GetOffensiveActionFromAnim(animationTracks.clip);
         Attacks = AttackManager.GetAttacks(OffensiveAction);
     }
+    */
 
     public OffensiveActionManager(Fighter fighter, String attackName) //Attack name is the one from the relevant "OffensiveAction"
     {
         this.fighter = fighter;
-        fighterManager = new FighterManager(fighter);
         OffensiveAction = FindOffensiveActionByName(attackName);
         Attacks = AttackManager.GetAttacks(OffensiveAction);
     }
 
+    /*
     public OffensiveActionManager(FighterManager fighterManager, AnimationTracks animationTracks)
     {
         fighter = fighterManager.fighter;
-        fighterManager = new FighterManager(fighter);
         OffensiveAction = GetOffensiveActionFromAnim(animationTracks.clip);
         Attacks = AttackManager.GetAttacks(OffensiveAction);
     }
+    */
 
     public OffensiveActionManager(FighterManager fighterManager, String attackName)
     {
@@ -72,7 +71,8 @@ public class OffensiveActionManager
     }
     
     //All of this part is a very strange way of getting these references, if a better way is found: fix this
-    private OffensiveAction GetOffensiveActionFromAnim(AnimationClip animClip)
+    /*
+    private OffensiveAction GetOffensiveActionFromAnim(AnimationClip animClip, FighterManager fighterManager)
     {
         string animName = animClip.name;
         StyleHandler styleHandler = fighterManager.GetComponent<StyleHandler>();
@@ -98,6 +98,7 @@ public class OffensiveActionManager
             return FindOffensiveActionByName(animName);
         }
     }
+    */
 
     public static OffensiveActionManager[] GetAllOffensiveActions(Fighter fighter)
     {
