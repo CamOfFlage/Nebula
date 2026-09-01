@@ -46,7 +46,7 @@ public class SeraphPatches : GlobalCombatTemplatePatch
 		 hit.damage = 6;  
 		 hit.stagger = 2;  
 	  }
-	}
+	
 
 	//Blocks
 	BlocksHandler blocksHandler = combatTemplate.enemy.blocksHandler;
@@ -59,7 +59,8 @@ public class SeraphPatches : GlobalCombatTemplatePatch
     blockSet02.blockDefs[0] = new BlockDef(BlockType.PhysicalAny, 10);
     blockSet02.blockDefs[1] = new BlockDef(BlockType.Wind, 10);
     blocksHandler._blockSets[0] = blockSet01;
-    blocksHandler._blockSets[1] = blockSet02;  
+    blocksHandler._blockSets[1] = blockSet02;
+    }  
 }
 ```
 ```C#
