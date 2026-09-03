@@ -8,7 +8,7 @@ public static class GameInfo
 {
     public static bool IsBooted = false;
     public static bool CombatTemplatesLoaded = false;
-    public static GameObject GameManager;
+    public static ModdingGameManager GameManager;
     public static GameObject CombatSystem;
     public static GameObject NavigationSystem;
     

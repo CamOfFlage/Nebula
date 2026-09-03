@@ -112,19 +112,15 @@ public class AttackManager
         }
         else //Enemy naming is more straight-forward
         {
-            Plugin.logger.LogMessage("Enemy pipeline");
             foreach (EvaTracks evaTracks in fighter.evaListener.evaTracks)
             {
-                Plugin.logger.LogMessage("EvaTracks:" + evaTracks.name);
                 foreach (AnimationTracks animationTracks in evaTracks.animationTracks)
                 {
                     if (animationTracks.clip.name.Equals(offensiveAction.name,
                             StringComparison.InvariantCultureIgnoreCase))
                     {
-                        Plugin.logger.LogMessage(animationTracks.clip.name + " matches");
                         if (!clips.Any(clip => clip.name.Equals(animationTracks.clip.name)))
                         {
-                            Plugin.logger.LogMessage(animationTracks.clip.name + " included");
                             clips.Add(animationTracks.clip);
                         }
                     }

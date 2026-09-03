@@ -7,6 +7,7 @@ namespace Nebula.Combat;
 public class CombatTemplatePatchHandler : PatchHandler
 {
     public static CombatTemplatePatchHandler instance;
+    public override Type GetPatchType() => typeof(GlobalCombatTemplatePatch);
 
     public void PatchTemplate(CombatTemplate combatTemplate)
     {
@@ -14,12 +15,6 @@ public class CombatTemplatePatchHandler : PatchHandler
         foreach (NebulaPatch nebulaPatch in patches)
         {
             GlobalCombatTemplatePatch patch = nebulaPatch as GlobalCombatTemplatePatch;
-            if (patch == null)
-            {
-                patches.Remove(nebulaPatch);
-                Plugin.logger.LogError($"Patch {nebulaPatch.patchId} is not a GlobalCombatTemplatePatch");
-            }
-
             if (patch.templateId.Equals(combatTemplate.id))
             {
                 patch.Patch(combatTemplate);

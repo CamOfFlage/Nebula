@@ -5,7 +5,7 @@ namespace Nebula.Combat;
 
 public abstract class CombatSystemPatch : NebulaPatch
 {
-    public override PatchHandler patchHandler => CombatSystemPatchHandler.Instance;
+    public override PatchHandler GetPatchHandler() => CombatSystemPatchHandler.Instance;
     
     public abstract void Patch(CombatSystem combatSystem);
 }

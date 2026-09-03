@@ -21,18 +21,21 @@ namespace Nebula
             ResourceEvents.Instance = new ResourceEvents();
             
             logger = Log;
-            Log.LogMessage($"{PluginInfo.PLUGIN_NAME} loaded!");
+            Log.LogMessage($"{PluginInfo.PLUGIN_NAME} loading...");
             
             ClassInjector.RegisterTypeInIl2Cpp<ModdingGameManager>();
             ClassInjector.RegisterTypeInIl2Cpp<BootChecker>();
             
-            GameObject manager = new GameObject("NebulaGameManager");
+            ModdingGameManager manager = AddComponent<ModdingGameManager>();
+            //GameObject manager = new GameObject("NebulaGameManager");
             GameInfo.GameManager = manager;
-            manager.hideFlags = HideFlags.HideAndDontSave;
-            manager.AddComponent<ModdingGameManager>();
-            manager.AddComponent<BootChecker>();
+            //GameObject.DontDestroyOnLoad(manager);
+            //manager.AddComponent<ModdingGameManager>();
+            AddComponent<BootChecker>();
             
             CombatTemplatePatchHandler.instance = new CombatTemplatePatchHandler();
+            ProjectilePatchHandler.Instance = new ProjectilePatchHandler();
+            Log.LogMessage($"{PluginInfo.PLUGIN_NAME} loaded!");
         }
     }
 

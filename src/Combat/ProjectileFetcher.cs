@@ -7,7 +7,7 @@ public class ProjectileFetcher
 {
     public GameObject fetchProjectile(AddressableKey addressableKey)
     {
-        Effects effects = GameObject.Find("Effects").GetComponent<Effects>();
+        Effects effects = MainSystem.effects;
         GameObject effectObject = effects.GetEffectInstance(addressableKey).gameObject;
         return effectObject;
     }

@@ -7,7 +7,7 @@ public class EvaManager
 {
     public EvaListener EvaListener;
     public Dictionary<String, EvaTrack[]> TracksByName = new Dictionary<String, EvaTrack[]>();
-    public Dictionary<AnimationClip, EvaTrack[]> TracksByClip = new Dictionary<AnimationClip, EvaTrack[]>();
+    private Dictionary<AnimationClip, EvaTrack[]> TracksByClip = new Dictionary<AnimationClip, EvaTrack[]>();
     public AnimationClip[] AnimationClips;
     private Dictionary<EvaClip, EvaTrack> _clipLocations;
 
@@ -67,23 +67,47 @@ public class EvaManager
         {
             foreach (AnimationTracks animationTracks in evaTracks.animationTracks)
             {
-                if (!evaTracksMap.ContainsKey(animationTracks.clip))
+                Plugin.logger.LogMessage(animationTracks.clip.name + " checking...");
+                if (!evaTracksMap.Keys.Any(key =>  key.name.Equals(animationTracks.clip.name)))
                 {
+                    Plugin.logger.LogMessage(animationTracks.clip.name + " does not exist");
                     List<EvaTrack> tracks = new List<EvaTrack>();
                     foreach (EvaTrack track in animationTracks.tracks)
                     {
                         tracks.Add(track);
                     }
                     evaTracksMap.Add(animationTracks.clip, tracks);
+                    Plugin.logger.LogMessage(animationTracks.clip.name + " added");
                 }
                 else
                 {
+                    Plugin.logger.LogMessage(animationTracks.clip.name + " already exists");
                     List<EvaTrack> tracks = new List<EvaTrack>();
                     foreach (EvaTrack track in animationTracks.tracks)
                     {
                         tracks.Add(track);
                     }
-                    evaTracksMap[animationTracks.clip].AddRange(tracks);
+
+                    AnimationClip? keyClip = null;
+                    foreach (KeyValuePair<AnimationClip, List<EvaTrack>> kvp in evaTracksMap)
+                    {
+                        if (animationTracks.clip.name.Equals(kvp.Key.name))
+                        {
+                            keyClip = kvp.Key;
+                        }
+                    }
+
+                    if (keyClip != null)
+                    {
+                        evaTracksMap[keyClip]
+                            .AddRange(
+                                tracks); //This needs to be by name. It does not reconize them as the same clip unless they are EXACTLY the same
+                        Plugin.logger.LogMessage("Added");
+                    }
+                    else
+                    {
+                        Plugin.logger.LogError("Failed to connect " + animationTracks.clip.name + " to the existing array");
+                    }
                 }
             }
         }
