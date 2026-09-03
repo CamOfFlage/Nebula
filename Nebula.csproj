@@ -46,6 +46,9 @@
       <Reference Include="Noname.Worldless.Combat">
         <HintPath>..\..\..\..\OneDrive\Desktop\Weird Steam Downloads\Modded Worldless\BepInEx\interop\Noname.Worldless.Combat.dll</HintPath>
       </Reference>
+      <Reference Include="Noname.Worldless.NavigationCombat">
+        <HintPath>..\..\..\..\OneDrive\Desktop\Weird Steam Downloads\Modded Worldless\BepInEx\interop\Noname.Worldless.NavigationCombat.dll</HintPath>
+      </Reference>
       <Reference Include="Unity.Addressables">
         <HintPath>..\..\..\..\OneDrive\Desktop\Weird Steam Downloads\Modded Worldless\BepInEx\interop\Unity.Addressables.dll</HintPath>
       </Reference>
