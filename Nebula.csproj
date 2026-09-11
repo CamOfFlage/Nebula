@@ -9,28 +9,12 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Reference Include="0Harmony">
-        <HintPath>..\..\Libraries\Bepinex\0Harmony.dll</HintPath>
-        <Private>False</Private>
-      </Reference>
       <Reference Include="Assembly-CSharp">
         <HintPath>..\..\Libraries\Game Libraries\Assembly-CSharp.dll</HintPath>
         <Private>False</Private>
       </Reference>
       <Reference Include="Assembly-CSharp-firstpass">
         <HintPath>..\..\Libraries\Game Libraries\Assembly-CSharp-firstpass.dll</HintPath>
-        <Private>False</Private>
-      </Reference>
-      <Reference Include="BepInEx.Core">
-        <HintPath>..\..\Libraries\Bepinex\BepInEx.Core.dll</HintPath>
-        <Private>False</Private>
-      </Reference>
-      <Reference Include="BepInEx.Unity.IL2CPP">
-        <HintPath>..\..\Libraries\Bepinex\BepInEx.Unity.IL2CPP.dll</HintPath>
-        <Private>False</Private>
-      </Reference>
-      <Reference Include="Il2CppInterop.Runtime">
-        <HintPath>..\..\Libraries\Bepinex\Il2CppInterop.Runtime.dll</HintPath>
         <Private>False</Private>
       </Reference>
       <Reference Include="Il2Cppmscorlib">
@@ -82,6 +66,24 @@
         <PrivateAssets>all</PrivateAssets>
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       </PackageReference>
+      <PackageReference Include="BepInEx.Core" Version="6.0.0-pre.1" />
+      <PackageReference Include="BepInEx.Unity.IL2CPP" Version="6.0.0-be.788" />
+      <PackageReference Include="Il2CppInterop.Runtime" Version="1.5.3" />
+      <PackageReference Include="Lib.Harmony" Version="2.4.2" />
     </ItemGroup>
 
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AssemblyName>Nebula</AssemblyName>
+    <RootNamespace>Nebula</RootNamespace>
+    <Authors>CamOfFlage</Authors>
+    <Company>CamOfFlage</Company>
+    <PackageId>CamOfFlage.Nebula</PackageId>
+    <VersionSuffix>v1.0.0</VersionSuffix>
+    <Description>A modding framework/library for Worldless</Description>
+    <PackageTags>modding;bepinex;worldless;library</PackageTags>
+    <RepositoryUrl>https://github.com/CamOfFlage/Nebula</RepositoryUrl>
+  </PropertyGroup>
 </Project>

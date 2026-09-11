@@ -10,7 +10,7 @@ public abstract class PatchHandler
         Plugin.logger.LogDebug($"Registering {patch.patchId}");
         if (patch.GetType() != GetPatchType())
         {
-            Plugin.logger.LogError("Patch " + patch.patchId + " not not match required patch type " + GetPatchType());
+            Plugin.logger.LogError("Patch " + patch.patchId + " does not match required patch type " + GetPatchType());
         }
         else
         {
