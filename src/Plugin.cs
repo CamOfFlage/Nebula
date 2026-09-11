@@ -7,7 +7,7 @@ using Nebula.Combat;
 namespace Nebula
 {
     [BepInPlugin(PluginInfo.PLUGIN_GUID, PluginInfo.PLUGIN_NAME, PluginInfo.PLUGIN_VERSION)]
-    public class Plugin : BasePlugin
+    internal class Plugin : BasePlugin
     {
         internal static ManualLogSource logger;
         
