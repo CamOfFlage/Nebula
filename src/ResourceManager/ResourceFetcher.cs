@@ -2,12 +2,9 @@
 
 namespace Nebula.ResourceManager;
 
-public class ResourceFetcher<T>
+public static class ResourceFetcher
 {
-    //Future scope of having this return the actual instance of T instead of its gameObject
-    private Type Type => typeof(T);
-
-    public GameObject Fetch(string name)
+    public static GameObject Fetch<T>(string name)
     {
         GameObject[] objects = Resources.FindObjectsOfTypeAll<GameObject>();
         List<GameObject> gameObjects = new List<GameObject>();
