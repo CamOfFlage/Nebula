@@ -1,20 +1,16 @@
 ﻿using BepInEx;
-using BepInEx.Unity.IL2CPP;
 using BepInEx.Logging;
-using HarmonyLib;
+using BepInEx.Unity.IL2CPP;
 using Il2CppInterop.Runtime.Injection;
 using Nebula.Combat;
-using Nebula.Patching;
-using UnityEngine;
 using Nebula.ResourceManager;
-using UnityEngine.SceneManagement;
 
 namespace Nebula
 {
     [BepInPlugin(PluginInfo.PLUGIN_GUID, PluginInfo.PLUGIN_NAME, PluginInfo.PLUGIN_VERSION)]
     public class Plugin : BasePlugin
     {
-        static internal ManualLogSource logger;
+        internal static ManualLogSource logger;
         
         public override void Load()
         {

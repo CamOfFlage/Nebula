@@ -1,8 +1,6 @@
 ﻿using BepInEx.Unity.IL2CPP.Utils.Collections;
 using HarmonyLib;
-using Nebula.Combat;
 using Noname;
-using Noname.Worldless.Combat;
 
 namespace Nebula.GameSystem.Hooks;
 

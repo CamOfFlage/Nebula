@@ -1,6 +1,4 @@
-﻿using HarmonyLib;
-using Nebula.Patching;
-using Noname;
+﻿using Nebula.Patching;
 using UnityEngine;
 
 namespace Nebula.Combat;

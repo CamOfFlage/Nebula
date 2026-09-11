@@ -1,6 +1,5 @@
 ﻿using Nebula.Patching;
 using UnityEngine;
-using Noname;
 
 namespace Nebula.Combat;
 

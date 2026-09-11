@@ -1,8 +1,9 @@
-﻿using Il2CppInterop.Runtime.Attributes;
+﻿using System.Collections;
+using Il2CppInterop.Runtime.Attributes;
 using Nebula.Combat;
-using UnityEngine;
-using Noname.Worldless.Combat;
 using Noname;
+using Noname.Worldless.Combat;
+using UnityEngine;
 
 namespace Nebula;
 
@@ -16,7 +17,7 @@ public class ModdingGameManager : MonoBehaviour
     public ModdingGameManager(IntPtr intPtr) : base(intPtr) { }
     
     [HideFromIl2Cpp]
-    public System.Collections.IEnumerator WaitForEffectsLoader(EffectsLoader loader)
+    public IEnumerator WaitForEffectsLoader(EffectsLoader loader)
     {
         bool isLoaded = false;
         WaitForSeconds wait = new WaitForSeconds(0.1f);

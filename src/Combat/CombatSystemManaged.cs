@@ -1,5 +1,5 @@
-﻿using Noname.Worldless.Combat;
-using Noname.Worldless;
+﻿using Noname.Worldless;
+using Noname.Worldless.Combat;
 
 namespace Nebula.Combat;
 

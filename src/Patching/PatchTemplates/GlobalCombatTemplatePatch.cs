@@ -1,5 +1,4 @@
-﻿using Nebula.Combat;
-using Nebula.Patching;
+﻿using Nebula.Patching;
 using Noname.Worldless.Combat;
 
 namespace Nebula.Combat;

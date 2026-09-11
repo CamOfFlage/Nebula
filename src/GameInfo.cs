@@ -1,6 +1,4 @@
 ﻿using UnityEngine;
-using Nebula.Combat;
-using Noname;
 
 namespace Nebula;
 
