@@ -4,13 +4,12 @@ namespace Nebula;
 
 public static class GameInfo
 {
-    public static bool IsBooted = false;
-    public static bool CombatTemplatesLoaded = false;
-    public static ModdingGameManager GameManager;
-    public static GameObject CombatSystem;
-    public static GameObject NavigationSystem;
+    public static bool IsBooted { get; set; } = false;
+    public static ModdingGameManager GameManager { get; set; }
+    public static GameObject CombatSystem { get; set; }
+    public static GameObject NavigationSystem { get; set; }
     
-    public static List<String> WarningKeys = new List<string>
+    public static List<string> WarningKeys = new List<string>
     {
         "light_physical_warning", "light_physical_warning_2", "light_physical_warning_3", "light_physical_warning_4",
         "light_magical_warning", "light_magical_warning_2", "light_magical_warning_3", "light_magical_warning_4",

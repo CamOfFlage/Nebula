@@ -30,9 +30,11 @@ public class ModdingGameManager : MonoBehaviour
         foreach (GameObjectReference gameObjectReference in loader._effects)
         {
             //Plugin.logger.LogMessage("Processing effect: " + gameObjectReference.name);
-            AddressableKey effectKey = new AddressableKey();
-            effectKey._key = gameObjectReference.name;
-            effectKey._guid = gameObjectReference.guid;
+            AddressableKey effectKey = new AddressableKey
+            {
+                _key = gameObjectReference.name,
+                _guid = gameObjectReference.guid
+            };
             Effect effect = MainSystem.effects.GetEffectInstance(effectKey);
             if (effect == null)
             {

@@ -9,15 +9,15 @@ public class BootChecker : MonoBehaviour
 {
     public BootChecker(IntPtr intPtr) : base(intPtr) { }
 
-    public bool HasStartedBootScene = false;
+    public bool hasStartedBootScene = false;
     private void Update()
     {
-        if (!HasStartedBootScene && SceneManager.GetActiveScene().name == "Boot")
+        if (!hasStartedBootScene && SceneManager.GetActiveScene().name == "Boot")
         {
-            HasStartedBootScene = true;
+            hasStartedBootScene = true;
             Plugin.logger.LogMessage("Booting...");
         }
-        if (SceneManager.GetActiveScene().name != "Boot" && !GameInfo.IsBooted && HasStartedBootScene)
+        if (SceneManager.GetActiveScene().name != "Boot" && !GameInfo.IsBooted && hasStartedBootScene)
         {
             Plugin.logger.LogMessage("Boot finished");
             GameInfo.IsBooted = true;

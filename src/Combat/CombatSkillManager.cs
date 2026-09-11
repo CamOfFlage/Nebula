@@ -4,15 +4,15 @@ namespace Nebula.Combat;
 
 public class CombatSkillManager
 {
-    private SkillsProgression progression;
+    private SkillsProgression Progression { get; }
     
     public CombatSkillManager(SkillsProgression progression)
     {
-        this.progression = progression;
+        this.Progression = progression;
     }
 
     public void SetSkillUnlockValue(CombatSkill.Skill skill, bool unlocked)
     {
-        progression.saveData.skills[skill] = unlocked;
+        Progression.saveData.skills[skill] = unlocked;
     }
 }

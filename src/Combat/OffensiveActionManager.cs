@@ -4,29 +4,20 @@ namespace Nebula.Combat;
 
 public class OffensiveActionManager
 {
-    public OffensiveAction OffensiveAction;
+    public OffensiveAction OffensiveAction { get; }
     public AttackManager[] Attacks;
-    private Fighter fighter;
+    private Fighter Fighter { get; }
     
     public OffensiveActionManager(OffensiveAction offensiveAction)
     {
         this.OffensiveAction = offensiveAction;
-        fighter = OffensiveAction._fighter;
+        Fighter = OffensiveAction._fighter;
         Attacks = AttackManager.GetAttacks(OffensiveAction);
     }
-
-    /*
-    public OffensiveActionManager(Fighter fighter, AnimationTracks animationTracks)
-    {
-        this.fighter = fighter;
-        OffensiveAction = GetOffensiveActionFromAnim(animationTracks.clip);
-        Attacks = AttackManager.GetAttacks(OffensiveAction);
-    }
-    */
 
     public OffensiveActionManager(Fighter fighter, String attackName) //Attack name is the one from the relevant "OffensiveAction"
     {
-        this.fighter = fighter;
+        this.Fighter = fighter;
         OffensiveAction = FindOffensiveActionByName(attackName);
         Attacks = AttackManager.GetAttacks(OffensiveAction);
     }
@@ -42,15 +33,15 @@ public class OffensiveActionManager
 
     public OffensiveActionManager(FighterManager fighterManager, String attackName)
     {
-        fighter = fighterManager.fighter;
-        fighterManager = new FighterManager(fighter);
+        Fighter = fighterManager.Fighter;
+        fighterManager = new FighterManager(Fighter);
         OffensiveAction = FindOffensiveActionByName(attackName);
         Attacks = AttackManager.GetAttacks(OffensiveAction);
     }
 
     private OffensiveAction FindOffensiveActionByName(string name)
     {
-        OffensiveHandler offensiveHandler = fighter.offensiveHandler;
+        OffensiveHandler offensiveHandler = Fighter.offensiveHandler;
         OffensiveAction[] offensiveActions = new OffensiveAction[offensiveHandler.offensiveActions.Length];
         for (int i = 0; i < offensiveActions.Length; i++)
         {

@@ -5,9 +5,9 @@ namespace Nebula.Eva;
 
 public class EvaManager
 {
-    public EvaListener EvaListener;
-    public Dictionary<String, EvaTrack[]> TracksByName = new Dictionary<String, EvaTrack[]>();
-    private Dictionary<AnimationClip, EvaTrack[]> TracksByClip = new Dictionary<AnimationClip, EvaTrack[]>();
+    public EvaListener EvaListener { get; }
+    public Dictionary<string, EvaTrack[]> TracksByName = new Dictionary<string, EvaTrack[]>();
+    private Dictionary<AnimationClip, EvaTrack[]> TracksByClip;
     public AnimationClip[] AnimationClips;
     private Dictionary<EvaClip, EvaTrack> _clipLocations;
 
@@ -25,7 +25,6 @@ public class EvaManager
 
     private AnimationClip[] GetAllAnimClips()
     {
-        List<AnimationClip> animationClips = new List<AnimationClip>();
         List<AnimationClip> allClips = new List<AnimationClip>();
 
         foreach (EvaTracks evaTracks in EvaListener.evaTracks)
@@ -35,8 +34,8 @@ public class EvaManager
                 allClips.Add(animationTracks.clip);
             }
         }
-        
-        animationClips = allClips.Distinct().ToList();
+
+        var animationClips = allClips.Distinct().ToList();
         return animationClips.ToArray();
     }
 

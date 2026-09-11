@@ -5,13 +5,7 @@ namespace Nebula.ResourceManager;
 public class ResourceFetcher<T>
 {
     //Future scope of having this return the actual instance of T instead of its gameObject
-    private Type _type
-    {
-        get
-        {
-            return typeof(T);
-        }
-    }
+    private Type Type => typeof(T);
 
     public GameObject Fetch(string name)
     {

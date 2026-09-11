@@ -8,14 +8,14 @@ public class ProjectilePatchHandler : PatchHandler
     public override Type GetPatchType() => typeof(ProjectilePatch);
     public static ProjectilePatchHandler Instance;
 
-    public void PatchProjectile(GameObject effect, String projectileId)
+    public void PatchProjectile(GameObject effect, string projectileId)
     {
-        foreach (NebulaPatch patch in this.patches)
+        foreach (NebulaPatch patch in this.Patches)
         {
             ProjectilePatch projectilePatch = patch as ProjectilePatch;
             if (projectilePatch != null)
             {
-                if (projectilePatch.projectileId == projectileId)
+                if (projectilePatch.ProjectileId == projectileId)
                 {
                     projectilePatch.Patch(effect);
                 }

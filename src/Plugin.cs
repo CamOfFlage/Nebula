@@ -3,7 +3,6 @@ using BepInEx.Logging;
 using BepInEx.Unity.IL2CPP;
 using Il2CppInterop.Runtime.Injection;
 using Nebula.Combat;
-using Nebula.ResourceManager;
 
 namespace Nebula
 {
@@ -14,8 +13,6 @@ namespace Nebula
         
         public override void Load()
         {
-            ResourceEvents.Instance = new ResourceEvents();
-            
             logger = Log;
             Log.LogMessage($"{PluginInfo.PLUGIN_NAME} loading...");
             
@@ -29,7 +26,7 @@ namespace Nebula
             //manager.AddComponent<ModdingGameManager>();
             AddComponent<BootChecker>();
             
-            CombatTemplatePatchHandler.instance = new CombatTemplatePatchHandler();
+            GlobalCombatTemplatePatchHandler.instance = new GlobalCombatTemplatePatchHandler();
             ProjectilePatchHandler.Instance = new ProjectilePatchHandler();
             Log.LogMessage($"{PluginInfo.PLUGIN_NAME} loaded!");
         }

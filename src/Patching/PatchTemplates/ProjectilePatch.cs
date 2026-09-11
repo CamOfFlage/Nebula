@@ -8,6 +8,6 @@ public abstract class ProjectilePatch : NebulaPatch
     public override PatchHandler GetPatchHandler() => ProjectilePatchHandler.Instance;
     
     public abstract void Patch(GameObject effect);
-    public abstract string projectileId { get; }
-    public abstract string projectileGuid { get; }
+    public abstract string ProjectileId { get; }
+    public abstract string ProjectileGuid { get; }
 }

@@ -5,7 +5,7 @@ namespace Nebula.Combat;
 
 public class ProjectileFetcher
 {
-    public GameObject fetchProjectile(AddressableKey addressableKey)
+    public GameObject FetchProjectile(AddressableKey addressableKey)
     {
         Effects effects = MainSystem.effects;
         GameObject effectObject = effects.GetEffectInstance(addressableKey).gameObject;

@@ -5,17 +5,17 @@ namespace Nebula.Eva;
 
 public class EvaTrackFetcher
 {
-    public EvaTrack FetchTrack(EvaListener evaListener, String evaTrackType, String animationName, int _evaTrack)
+    public static EvaTrack FetchTrack(EvaListener evaListener, string evaTrackType, string animationName, int _evaTrack)
     {
         EvaTracks evaTracks = null;
         Il2CppReferenceArray<EvaTracks> evaTracksArray = evaListener.evaTracks;
-        for (int i = 0; i < evaTracksArray.Length; i++)
+        foreach (EvaTracks track in evaTracksArray)
         {
-            Plugin.logger.LogMessage(evaTracksArray[i].name);
+            Plugin.logger.LogMessage(track.name);
             Plugin.logger.LogMessage(evaTrackType);
-            if (evaTracksArray[i].name.Equals(evaTrackType))
+            if (track.name.Equals(evaTrackType))
             {
-                evaTracks = evaTracksArray[i];
+                evaTracks = track;
                 break;
             }
         }
@@ -40,7 +40,7 @@ public class EvaTrackFetcher
         return evaTrack;
     }
 
-    public EvaTrack FetchTrack(EvaListener evaListener, String animationName, String evaTrackType)
+    public EvaTrack FetchTrack(EvaListener evaListener, string animationName, string evaTrackType)
     {
         foreach (AnimationTracks animationTracks in GetAllAnimationTracks(evaListener))
         {
@@ -58,7 +58,7 @@ public class EvaTrackFetcher
         throw new Exception("No EVA tracks found");
     }
 
-    public EvaTrack[] FetchTracks(EvaListener evaListener, String animationName)
+    public EvaTrack[] FetchTracks(EvaListener evaListener, string animationName)
     {
         List<EvaTrack> evaTracks = new List<EvaTrack>();
         foreach (AnimationTracks animationTracks in GetAllAnimationTracks(evaListener))

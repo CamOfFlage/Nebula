@@ -5,17 +5,17 @@ namespace Nebula.Combat;
 
 public class CombatSystemManaged
 {
-    public CombatSystem combatSystem;
-    public FighterAven aven;
-    public FighterEdda edda;
-    public Il2CppSystem.Collections.Generic.Dictionary<CombatSkill.Skill, CombatSkill> skillTreeSkills;
-    public CombatSkillManager skillManager;
+    public CombatSystem CombatSystem { get; }
+    public FighterAven Aven { get; }
+    public FighterEdda Edda { get; }
+    public Il2CppSystem.Collections.Generic.Dictionary<CombatSkill.Skill, CombatSkill> SkillTreeSkills;
+    public CombatSkillManager SkillManager;
     
-    public int darkEssence
+    public int DarkEssence
     {
         get
         {
-            return combatSystem.progression.skills.GetNumEssences(Faction.Dark);
+            return CombatSystem.progression.skills.GetNumEssences(Faction.Dark);
         }
         set
         {
@@ -24,28 +24,28 @@ public class CombatSystemManaged
                 throw new IndexOutOfRangeException("Essence must be between 0 and 99");
             }
 
-            if (value > darkEssence)
+            if (value > DarkEssence)
             {
-                int addAmount = value - darkEssence;
-                combatSystem.progression.skills.IncreaseEssences(Faction.Dark, addAmount);
+                int addAmount = value - DarkEssence;
+                CombatSystem.progression.skills.IncreaseEssences(Faction.Dark, addAmount);
             }
 
-            if (value < darkEssence)
+            if (value < DarkEssence)
             {
-                int removeAmount = darkEssence - value;
+                int removeAmount = DarkEssence - value;
                 for (int i = 0; i < removeAmount; i++)
                 {
-                    combatSystem.progression.skills.DecreaseEssences(Faction.Dark);
+                    CombatSystem.progression.skills.DecreaseEssences(Faction.Dark);
                 }
             }
         }
     }
     
-    public int lightEssence
+    public int LightEssence
     {
         get
         {
-            return combatSystem.progression.skills.GetNumEssences(Faction.Light);
+            return CombatSystem.progression.skills.GetNumEssences(Faction.Light);
         }
         set
         {
@@ -54,28 +54,28 @@ public class CombatSystemManaged
                 throw new IndexOutOfRangeException("Essence must be between 0 and 99");
             }
 
-            if (value > lightEssence)
+            if (value > LightEssence)
             {
-                int addAmount = value - lightEssence;
-                combatSystem.progression.skills.IncreaseEssences(Faction.Light, addAmount);
+                int addAmount = value - LightEssence;
+                CombatSystem.progression.skills.IncreaseEssences(Faction.Light, addAmount);
             }
 
-            if (value < lightEssence)
+            if (value < LightEssence)
             {
-                int removeAmount = lightEssence - value;
+                int removeAmount = LightEssence - value;
                 for (int i = 0; i < removeAmount; i++)
                 {
-                    combatSystem.progression.skills.DecreaseEssences(Faction.Light);
+                    CombatSystem.progression.skills.DecreaseEssences(Faction.Light);
                 }
             }
         }
     }
     
-    public int hybridEssence
+    public int HybridEssence
     {
         get
         {
-            return combatSystem.progression.skills.GetNumEssences(Faction.Hybrid);
+            return CombatSystem.progression.skills.GetNumEssences(Faction.Hybrid);
         }
         set
         {
@@ -84,18 +84,18 @@ public class CombatSystemManaged
                 throw new IndexOutOfRangeException("Essence must be between 0 and 99");
             }
 
-            if (value > hybridEssence)
+            if (value > HybridEssence)
             {
-                int addAmount = value - hybridEssence;
-                combatSystem.progression.skills.IncreaseEssences(Faction.Hybrid, addAmount);
+                int addAmount = value - HybridEssence;
+                CombatSystem.progression.skills.IncreaseEssences(Faction.Hybrid, addAmount);
             }
 
-            if (value < hybridEssence)
+            if (value < HybridEssence)
             {
-                int removeAmount = hybridEssence - value;
+                int removeAmount = HybridEssence - value;
                 for (int i = 0; i < removeAmount; i++)
                 {
-                    combatSystem.progression.skills.DecreaseEssences(Faction.Hybrid);
+                    CombatSystem.progression.skills.DecreaseEssences(Faction.Hybrid);
                 }
             }
         }
@@ -105,10 +105,10 @@ public class CombatSystemManaged
 
     public CombatSystemManaged(CombatSystem combatSystem)
     {
-        this.combatSystem = combatSystem;
-        aven = combatSystem.transform.FindChild("FighterAven").GetComponent<FighterAven>();
-        edda = combatSystem.transform.FindChild("FighterEdda").GetComponent<FighterEdda>();
-        skillTreeSkills = combatSystem.progression.skills._combatSkillsDictionary._dict;
-        skillManager = new CombatSkillManager(combatSystem.progression.skills);
+        this.CombatSystem = combatSystem;
+        Aven = combatSystem.transform.FindChild("FighterAven").GetComponent<FighterAven>();
+        Edda = combatSystem.transform.FindChild("FighterEdda").GetComponent<FighterEdda>();
+        SkillTreeSkills = combatSystem.progression.skills._combatSkillsDictionary._dict;
+        SkillManager = new CombatSkillManager(combatSystem.progression.skills);
     }
 }

@@ -6,35 +6,35 @@ namespace Nebula.Combat;
 
 public class AttackManager
 {
-    private EvaTrack[] evaTracks;
-    public EvaClip[] evaClips;
-    public string attackName;
-    public AnimationClip animationClip;
-    public List<HitClip> hitClips = new List<HitClip>();
-    public List<EffectClip> warnings = new List<EffectClip>();
-    public List<EffectClip> effects = new List<EffectClip>();
-    public List<SfxClip> sfxClips = new List<SfxClip>();
-    public List<ProjectileClip> projectileClips =  new List<ProjectileClip>();
+    private EvaTrack[] _evaTracks { get; }
+    public EvaClip[] EvaClips { get; private set; }
+    public string AttackName { get; private set; }
+    public AnimationClip AnimationClip { get; private set; }
+    public List<HitClip> HitClips { get; } = new List<HitClip>();
+    public List<EffectClip> Warnings { get; } = new List<EffectClip>();
+    public List<EffectClip> Effects { get; } = new List<EffectClip>();
+    public List<SfxClip> SfxClips { get; } = new List<SfxClip>();
+    public List<ProjectileClip> ProjectileClips { get; } =  new List<ProjectileClip>();
     
     public AttackManager(EvaListener evaListener, AnimationClip animationClip)
     {
-        evaTracks = GetEvaTracks(evaListener, animationClip);
+        _evaTracks = GetEvaTracks(evaListener, animationClip);
         
         List<EvaClip> _evaClips = new List<EvaClip>();
-        foreach (EvaTrack evaTrack in evaTracks)
+        foreach (EvaTrack evaTrack in _evaTracks)
         {
             foreach (EvaClip evaClip in evaTrack.clips)
             {
                 _evaClips.Add(evaClip);
             }
         }
-        evaClips = _evaClips.ToArray();
+        EvaClips = _evaClips.ToArray();
         
-        this.animationClip = animationClip;
-        attackName = animationClip.name;
-        Array.Sort(evaClips, (x, y) => x.start.CompareTo(y.start));
+        this.AnimationClip = animationClip;
+        AttackName = animationClip.name;
+        Array.Sort(EvaClips, (x, y) => x.start.CompareTo(y.start));
 
-        foreach (EvaClip clip in evaClips)
+        foreach (EvaClip clip in EvaClips)
         {
             DistributeClip(clip);
         }
@@ -57,9 +57,9 @@ public class AttackManager
     private EvaTrack[] GetEvaTracks(EvaListener evaListener,  AnimationClip animClip)
     {
         List<EvaTrack> tracks = new List<EvaTrack>();
-        foreach (EvaTracks evaTracks in evaListener.evaTracks)
+        foreach (EvaTracks _evaTracks in evaListener.evaTracks)
         {
-            foreach (AnimationTracks animationTracks in evaTracks.animationTracks)
+            foreach (AnimationTracks animationTracks in _evaTracks.animationTracks)
             {
                 if (animationTracks.clip.name.Equals(animClip.name))
                 {
@@ -76,7 +76,7 @@ public class AttackManager
     private T[] getAllTracksOfType<T>() where T : EvaClip<T>
     {
         List<T> tracks = new List<T>();
-        foreach (EvaTrack evaTrack in evaTracks)
+        foreach (EvaTrack evaTrack in _evaTracks)
         {
             foreach (EvaClip evaClip in evaTrack.clips)
             {
@@ -137,11 +137,11 @@ public class AttackManager
             EffectClip effectClip = clip.TryCast<EffectClip>();
             if (GameInfo.WarningKeys.Contains(effectClip.addressableKey.key))
             {
-                warnings.Add(effectClip);
+                Warnings.Add(effectClip);
             }
             else
             {
-                effects.Add(effectClip);
+                Effects.Add(effectClip);
             }
             return;
         }
@@ -149,20 +149,20 @@ public class AttackManager
         if (clip.TryCast<SfxClip>() != null)
         {
             SfxClip sfxClip = clip.TryCast<SfxClip>();
-            sfxClips.Add(sfxClip);
+            SfxClips.Add(sfxClip);
             return;
         }
         
         if (clip.TryCast<HitClip>() != null)
         {
             HitClip hitClip = clip.TryCast<HitClip>();
-            hitClips.Add(hitClip);
+            HitClips.Add(hitClip);
         }
         
         if (clip.TryCast<ProjectileClip>() != null)
         {
             ProjectileClip projectileClip = clip.TryCast<ProjectileClip>();
-            projectileClips.Add(projectileClip);
+            ProjectileClips.Add(projectileClip);
         }
     }
 }

@@ -7,30 +7,30 @@ namespace Nebula.Combat;
 
 public class FighterManager
 {
-    public Fighter fighter { get; private set; }
+    public Fighter Fighter { get; private set; }
     public EvaListener EvaListener;
-    public Dictionary<string, OffensiveActionManager> offensiveActions = new Dictionary<string, OffensiveActionManager>();
+    public Dictionary<string, OffensiveActionManager> OffensiveActions = new Dictionary<string, OffensiveActionManager>();
 
     public FighterManager(Fighter fighter)
     {
-        this.fighter = fighter;
+        this.Fighter = fighter;
         EvaListener = fighter.evaListener;
-        OffensiveActionManager[] _offensiveActions = OffensiveActionManager.GetAllOffensiveActions(fighter);
-        foreach (OffensiveActionManager offensiveAction in _offensiveActions)
+        OffensiveActionManager[] offensiveActions = OffensiveActionManager.GetAllOffensiveActions(fighter);
+        foreach (OffensiveActionManager offensiveAction in offensiveActions)
         {
-            offensiveActions.Add(offensiveAction.OffensiveAction.name, offensiveAction);
+            OffensiveActions.Add(offensiveAction.OffensiveAction.name, offensiveAction);
         }
     }
 
-    public GameObject getModel()
+    public GameObject GetModel()
     {
-        Model model = fighter.model;
+        Model model = Fighter.model;
         return model.gameObject;
     }
 
     public T GetComponent<T>() where T : Il2CppObjectBase
     {
-        foreach (IFighterComponent component in fighter._fighterComponents)
+        foreach (IFighterComponent component in Fighter._fighterComponents)
         {
             T componentType = component.TryCast<T>();
             if (componentType != null)

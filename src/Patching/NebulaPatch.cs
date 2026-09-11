@@ -4,12 +4,12 @@ namespace Nebula;
 
 public abstract class NebulaPatch
 {
-    public abstract String patchId { get; }
+    public abstract string PatchId { get; }
     public abstract PatchHandler GetPatchHandler();
     
     public void Register()
     {
-        Plugin.logger.LogMessage($"Nebula Patch {patchId} registered");
-        GetPatchHandler().patches.Add(this);
+        Plugin.logger.LogMessage($"Nebula Patch {PatchId} registered");
+        GetPatchHandler().Patches.Add(this);
     }
 }
