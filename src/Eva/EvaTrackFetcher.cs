@@ -1,23 +1,21 @@
 ﻿using Il2CppInterop.Runtime.InteropTypes.Arrays;
-using UnityEngine.Animations;
-
 using Noname;
 
 namespace Nebula.Eva;
 
 public class EvaTrackFetcher
 {
-    public EvaTrack FetchTrack(EvaListener evaListener, String evaTrackType, String animationName, int _evaTrack)
+    public static EvaTrack FetchTrack(EvaListener evaListener, string evaTrackType, string animationName, int _evaTrack)
     {
         EvaTracks evaTracks = null;
         Il2CppReferenceArray<EvaTracks> evaTracksArray = evaListener.evaTracks;
-        for (int i = 0; i < evaTracksArray.Length; i++)
+        foreach (EvaTracks track in evaTracksArray)
         {
-            Plugin.logger.LogMessage(evaTracksArray[i].name);
+            Plugin.logger.LogMessage(track.name);
             Plugin.logger.LogMessage(evaTrackType);
-            if (evaTracksArray[i].name == evaTrackType)
+            if (track.name.Equals(evaTrackType))
             {
-                evaTracks = evaTracksArray[i];
+                evaTracks = track;
                 break;
             }
         }
@@ -40,5 +38,52 @@ public class EvaTrackFetcher
         EvaTrack evaTrack = animationTracks.tracks[_evaTrack];
         Plugin.logger.LogMessage(evaTrack.name);
         return evaTrack;
+    }
+
+    public EvaTrack FetchTrack(EvaListener evaListener, string animationName, string evaTrackType)
+    {
+        foreach (AnimationTracks animationTracks in GetAllAnimationTracks(evaListener))
+        {
+            if (animationTracks.clip.name.Equals(animationName))
+            {
+                foreach (EvaTrack evaTrack in animationTracks.tracks)
+                {
+                    if (evaTrack.name.Equals(evaTrackType))
+                    {
+                        return evaTrack;
+                    }
+                }
+            }
+        }
+        throw new Exception("No EVA tracks found");
+    }
+
+    public EvaTrack[] FetchTracks(EvaListener evaListener, string animationName)
+    {
+        List<EvaTrack> evaTracks = new List<EvaTrack>();
+        foreach (AnimationTracks animationTracks in GetAllAnimationTracks(evaListener))
+        {
+            if (animationTracks.clip.name.Equals(animationName))
+            {
+                foreach (EvaTrack evaTrack in animationTracks.tracks)
+                {
+                    evaTracks.Add(evaTrack);
+                }
+            }
+        }
+        return evaTracks.ToArray();
+    }
+
+    private AnimationTracks[] GetAllAnimationTracks(EvaListener evaListener)
+    {
+        List<AnimationTracks> animationTracksList = new List<AnimationTracks>();
+        foreach (EvaTracks evaTracks in evaListener.evaTracks)
+        {
+            foreach (AnimationTracks animTracks in evaTracks.animationTracks)
+            {
+                animationTracksList.Add(animTracks);
+            }
+        }
+        return animationTracksList.ToArray();
     }
 }

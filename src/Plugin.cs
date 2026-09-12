@@ -1,47 +1,36 @@
 ﻿using BepInEx;
-using BepInEx.Unity.IL2CPP;
 using BepInEx.Logging;
-using HarmonyLib;
+using BepInEx.Unity.IL2CPP;
 using Il2CppInterop.Runtime.Injection;
 using Nebula.Combat;
-using Nebula.Patching;
-using UnityEngine;
-using Nebula.ResourceManager;
-using UnityEngine.SceneManagement;
 
 namespace Nebula
 {
     [BepInPlugin(PluginInfo.PLUGIN_GUID, PluginInfo.PLUGIN_NAME, PluginInfo.PLUGIN_VERSION)]
-    public class Plugin : BasePlugin
+    internal class Plugin : BasePlugin
     {
-        static internal ManualLogSource logger;
+        internal static ManualLogSource logger;
         
         public override void Load()
         {
-            ResourceEvents.Instance = new ResourceEvents();
-            //GameInfo.CombatSystem = GameObject.Find("CombatSystem(Clone)");
-            //GameInfo.NavigationSystem = GameObject.Find("NavigationSystem(Clone)");
-            
             logger = Log;
-            Log.LogMessage($"{PluginInfo.PLUGIN_NAME} loaded!");
+            Log.LogMessage($"{PluginInfo.PLUGIN_NAME} loading...");
             
-            ClassInjector.RegisterTypeInIl2Cpp<ModdingGameManager>();
+            ClassInjector.RegisterTypeInIl2Cpp<NebulaGameManager>();
             ClassInjector.RegisterTypeInIl2Cpp<BootChecker>();
             
-            GameObject manager = new GameObject("NebulaGameManager");
+            NebulaGameManager manager = AddComponent<NebulaGameManager>();
             GameInfo.GameManager = manager;
-            manager.hideFlags = HideFlags.HideAndDontSave;
-            manager.AddComponent<ModdingGameManager>();
-            manager.AddComponent<BootChecker>();
+            BootChecker bootChecker = AddComponent<BootChecker>();
+            GameInfo.BootChecker = bootChecker;
             
-            CombatTemplatePatchHandler.instance = new CombatTemplatePatchHandler();
-            
-            Harmony harmony = new Harmony(PluginInfo.PLUGIN_GUID);
-            harmony.PatchAll();
+            GlobalCombatTemplatePatchHandler.instance = new GlobalCombatTemplatePatchHandler();
+            ProjectilePatchHandler.Instance = new ProjectilePatchHandler();
+            Log.LogMessage($"{PluginInfo.PLUGIN_NAME} loaded!");
         }
     }
 
-    public static class PluginInfo
+    internal static class PluginInfo
     {
         public const string PLUGIN_GUID = "com.CamOfFlage.Nebula";
         public const string PLUGIN_NAME = "Nebula";

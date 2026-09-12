@@ -1,20 +1,17 @@
-﻿using Il2CppInterop.Runtime;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Nebula.ResourceManager;
 
-public class ResourceFetcher<T>
+public static class ResourceFetcher
 {
-    //Future scope of having this return the actual instance of T instead of its gameObject
-    private Type _type
-    {
-        get
-        {
-            return typeof(T);
-        }
-    }
-
-    public GameObject Fetch(string name)
+    /// <summary>
+    /// Retrieves first game object with the given parameters
+    /// </summary>
+    /// <param name="name">The name of the target game object</param>
+    /// <typeparam name="T">The filter for components</typeparam>
+    /// <returns>The first game object found in the resources, not the live assets</returns>
+    /// <exception cref="Exception">Thrown when no resource was found</exception>
+    public static GameObject Fetch<T>(string name)
     {
         GameObject[] objects = Resources.FindObjectsOfTypeAll<GameObject>();
         List<GameObject> gameObjects = new List<GameObject>();
@@ -24,7 +21,7 @@ public class ResourceFetcher<T>
             {
                 Plugin.logger.LogMessage(go.name);
             }
-            if (go.name == name && go.GetComponent<T>() != null && !go.scene.IsValid())
+            if (go.name.Equals(name) && go.GetComponent<T>() != null && !go.scene.IsValid())
             {
                 gameObjects.Add(go);
             }

@@ -1,13 +1,12 @@
-﻿using Nebula.Combat;
-using Nebula.Patching;
+﻿using Nebula.Patching;
 using Noname.Worldless.Combat;
 
-namespace Nebula.PatchTemplates;
+namespace Nebula.Combat;
 
 public abstract class GlobalCombatTemplatePatch : NebulaPatch
 {
-    public virtual String templateId { get; }
-    public override PatchHandler patchHandler { get; } = CombatTemplatePatchHandler.instance;
+    public abstract string TemplateId { get; }
+    public override PatchHandler GetPatchHandler() => GlobalCombatTemplatePatchHandler.instance;
 
     public abstract void Patch(CombatTemplate combatTemplate);
 }
