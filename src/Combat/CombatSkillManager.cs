@@ -2,6 +2,9 @@
 
 namespace Nebula.Combat;
 
+/// <summary>
+/// Allows for the adding and revoking of combat abilities
+/// </summary>
 public class CombatSkillManager
 {
     private SkillsProgression Progression { get; }

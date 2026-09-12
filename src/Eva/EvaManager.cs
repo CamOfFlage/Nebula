@@ -3,14 +3,32 @@ using UnityEngine;
 
 namespace Nebula.Eva;
 
+/// <summary>
+/// Wrapper class to help control an instance of <see cref="T:Noname.EvaListener"/>
+/// </summary>
 public class EvaManager
 {
+    /// <summary>
+    /// The original EvaListener
+    /// </summary>
+    /// <remarks>
+    /// You shouldn't need this unless you are doing something more advanced, most functionality is covered already
+    /// </remarks>
     public EvaListener EvaListener { get; }
+    /// <summary>
+    /// Gets the corresponding EvaTrack[] by the name of the animation
+    /// </summary>
     public Dictionary<string, EvaTrack[]> TracksByName = new Dictionary<string, EvaTrack[]>();
+    /// <summary>
+    /// Gets the EvaTrack[] that is connected to the given <see cref="AnimationClip"/>
+    /// </summary>
     private Dictionary<AnimationClip, EvaTrack[]> TracksByClip;
+    /// <summary>
+    /// All <see cref="AnimationClip"/> in the EvaListener
+    /// </summary>
     public AnimationClip[] AnimationClips;
     private Dictionary<EvaClip, EvaTrack> _clipLocations;
-
+    
     public EvaManager(EvaListener evaListener)
     {
         EvaListener = evaListener;

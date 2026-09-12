@@ -7,17 +7,12 @@ using UnityEngine;
 
 namespace Nebula;
 
-public class ModdingGameManager : MonoBehaviour
+internal class NebulaGameManager : MonoBehaviour
 {
-    /*
-     * Check if templates are loaded and invoke event
-     * OnSceneLoad, find all new templates and modify
-     * OnSceneUnload, remove all old templates
-     */
-    public ModdingGameManager(IntPtr intPtr) : base(intPtr) { }
+    public NebulaGameManager(IntPtr intPtr) : base(intPtr) { }
     
     [HideFromIl2Cpp]
-    public IEnumerator WaitForEffectsLoader(EffectsLoader loader)
+    internal IEnumerator WaitForEffectsLoader(EffectsLoader loader)
     {
         bool isLoaded = false;
         WaitForSeconds wait = new WaitForSeconds(0.1f);

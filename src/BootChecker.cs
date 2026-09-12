@@ -5,19 +5,22 @@ using UnityEngine.SceneManagement;
 
 namespace Nebula;
 
+/// <summary>
+/// The system for detecting the stages of the boot process
+/// </summary>
 public class BootChecker : MonoBehaviour
 {
     public BootChecker(IntPtr intPtr) : base(intPtr) { }
 
-    public bool hasStartedBootScene = false;
+    private bool _hasStartedBootScene = false;
     private void Update()
     {
-        if (!hasStartedBootScene && SceneManager.GetActiveScene().name == "Boot")
+        if (!_hasStartedBootScene && SceneManager.GetActiveScene().name == "Boot")
         {
-            hasStartedBootScene = true;
+            _hasStartedBootScene = true;
             Plugin.logger.LogMessage("Booting...");
         }
-        if (SceneManager.GetActiveScene().name != "Boot" && !GameInfo.IsBooted && hasStartedBootScene)
+        if (SceneManager.GetActiveScene().name != "Boot" && !GameInfo.IsBooted && _hasStartedBootScene)
         {
             Plugin.logger.LogMessage("Boot finished");
             GameInfo.IsBooted = true;

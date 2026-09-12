@@ -5,14 +5,14 @@ using Noname;
 namespace Nebula.GameSystem.Hooks;
 
 [HarmonyPatch(typeof(EffectsLoader), "LoadEffects")]
-public class EffectsLoaderHooks
+internal class EffectsLoaderHooks
 {
     [HarmonyPostfix]
-    static void LoadEffects(EffectsLoader __instance)
+    private static void LoadEffects(EffectsLoader __instance)
     {
         Plugin.logger.LogMessage("Loading effects for " + __instance.name);
 
-        ModdingGameManager gameManager = GameInfo.GameManager;
+        NebulaGameManager gameManager = GameInfo.GameManager;
         gameManager.StartCoroutine(gameManager.WaitForEffectsLoader(__instance).WrapToIl2Cpp());
     }
 }

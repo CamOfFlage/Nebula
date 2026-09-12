@@ -16,15 +16,13 @@ namespace Nebula
             logger = Log;
             Log.LogMessage($"{PluginInfo.PLUGIN_NAME} loading...");
             
-            ClassInjector.RegisterTypeInIl2Cpp<ModdingGameManager>();
+            ClassInjector.RegisterTypeInIl2Cpp<NebulaGameManager>();
             ClassInjector.RegisterTypeInIl2Cpp<BootChecker>();
             
-            ModdingGameManager manager = AddComponent<ModdingGameManager>();
-            //GameObject manager = new GameObject("NebulaGameManager");
+            NebulaGameManager manager = AddComponent<NebulaGameManager>();
             GameInfo.GameManager = manager;
-            //GameObject.DontDestroyOnLoad(manager);
-            //manager.AddComponent<ModdingGameManager>();
-            AddComponent<BootChecker>();
+            BootChecker bootChecker = AddComponent<BootChecker>();
+            GameInfo.BootChecker = bootChecker;
             
             GlobalCombatTemplatePatchHandler.instance = new GlobalCombatTemplatePatchHandler();
             ProjectilePatchHandler.Instance = new ProjectilePatchHandler();

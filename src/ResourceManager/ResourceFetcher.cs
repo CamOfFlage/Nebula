@@ -4,6 +4,13 @@ namespace Nebula.ResourceManager;
 
 public static class ResourceFetcher
 {
+    /// <summary>
+    /// Retrieves first game object with the given parameters
+    /// </summary>
+    /// <param name="name">The name of the target game object</param>
+    /// <typeparam name="T">The filter for components</typeparam>
+    /// <returns>The first game object found in the resources, not the live assets</returns>
+    /// <exception cref="Exception">Thrown when no resource was found</exception>
     public static GameObject Fetch<T>(string name)
     {
         GameObject[] objects = Resources.FindObjectsOfTypeAll<GameObject>();

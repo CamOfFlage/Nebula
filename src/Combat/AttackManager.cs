@@ -4,24 +4,68 @@ using UnityEngine;
 
 namespace Nebula.Combat;
 
+/// <summary>
+/// Wrapper class for a single attack action
+/// </summary>
+/// <remarks>
+/// For enemies this is almost always a full turn of attacks.
+/// For the player it is each attack in a combo
+/// </remarks>
 public class AttackManager
 {
-    private EvaTrack[] _evaTracks { get; }
+    private EvaTrack[] EvaTracks { get; }
+    /// <summary>
+    /// All clips associated with the attack in chronological order
+    /// </summary>
+    /// <remarks>
+    /// It's often better to use the other specific clip arrays to avoid type casting,
+    /// but it may be required if you want to use a more obscure clip type
+    /// </remarks>
     public EvaClip[] EvaClips { get; private set; }
+    /// <summary>
+    /// The internal name for the attack
+    /// </summary>
+    /// <remarks>
+    /// Often in the format of "attack01", "attack02", etc... <br/>
+    /// Changes for each attack in a combo
+    /// </remarks>
     public string AttackName { get; private set; }
+    /// <summary>
+    /// The AnimationClip of the attack
+    /// </summary>
     public AnimationClip AnimationClip { get; private set; }
+    /// <summary>
+    /// All Hits in chronological order
+    /// </summary>
     public List<HitClip> HitClips { get; } = new List<HitClip>();
+    /// <summary>
+    /// All Warnings in chronological order
+    /// </summary>
     public List<EffectClip> Warnings { get; } = new List<EffectClip>();
+    /// <summary>
+    /// All Effects in chronological order
+    /// </summary>
     public List<EffectClip> Effects { get; } = new List<EffectClip>();
+    /// <summary>
+    /// All Sound Effects in chronological order
+    /// </summary>
     public List<SfxClip> SfxClips { get; } = new List<SfxClip>();
+    /// <summary>
+    /// All Projectiles in chronological order
+    /// </summary>
     public List<ProjectileClip> ProjectileClips { get; } =  new List<ProjectileClip>();
     
+    /// <summary>
+    /// Gets all the EvaClips and sorts them into the arrays
+    /// </summary>
+    /// <param name="evaListener">The EvaListener for the Fighter's main model</param>
+    /// <param name="animationClip">The animation for the attack</param>
     public AttackManager(EvaListener evaListener, AnimationClip animationClip)
     {
-        _evaTracks = GetEvaTracks(evaListener, animationClip);
+        EvaTracks = GetEvaTracks(evaListener, animationClip);
         
         List<EvaClip> _evaClips = new List<EvaClip>();
-        foreach (EvaTrack evaTrack in _evaTracks)
+        foreach (EvaTrack evaTrack in EvaTracks)
         {
             foreach (EvaClip evaClip in evaTrack.clips)
             {
@@ -40,6 +84,11 @@ public class AttackManager
         }
     }
 
+    /// <summary>
+    /// Finds all the attacks linked to the offensive action
+    /// </summary>
+    /// <param name="offensiveAction">The OffensiveAction of the desired attack</param>
+    /// <returns>An <see cref="AttackManager"/> for every attack</returns>
     public static AttackManager[] GetAttacks(OffensiveAction offensiveAction)
     {
         Fighter fighter = offensiveAction._fighter;
@@ -76,7 +125,7 @@ public class AttackManager
     private T[] getAllTracksOfType<T>() where T : EvaClip<T>
     {
         List<T> tracks = new List<T>();
-        foreach (EvaTrack evaTrack in _evaTracks)
+        foreach (EvaTrack evaTrack in EvaTracks)
         {
             foreach (EvaClip evaClip in evaTrack.clips)
             {
