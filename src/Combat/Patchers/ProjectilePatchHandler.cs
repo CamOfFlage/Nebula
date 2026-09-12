@@ -15,7 +15,7 @@ public class ProjectilePatchHandler : PatchHandler
             ProjectilePatch projectilePatch = patch as ProjectilePatch;
             if (projectilePatch != null)
             {
-                if (projectilePatch.ProjectileId == projectileId)
+                if (projectilePatch.ProjectileKey == projectileId)
                 {
                     projectilePatch.Patch(effect);
                 }
