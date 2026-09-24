@@ -14,9 +14,12 @@ public class GlobalCombatTemplatePatchHandler : PatchHandler
         foreach (NebulaPatch nebulaPatch in Patches)
         {
             GlobalCombatTemplatePatch patch = nebulaPatch as GlobalCombatTemplatePatch;
-            if (patch.TemplateId.Equals(combatTemplate.id))
+            if (patch != null)
             {
-                patch.Patch(combatTemplate);
+                if (patch.TemplateId.Equals(combatTemplate.id) || patch.TemplateId.Equals("Any"))
+                {
+                    patch.Patch(combatTemplate);
+                }
             }
         }
     }
