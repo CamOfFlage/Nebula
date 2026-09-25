@@ -13,7 +13,7 @@ public class CombatSystemPatchHandler : PatchHandler
         foreach (NebulaPatch nebulaPatch in this.Patches)
         {
             CombatSystemPatch patch = nebulaPatch as CombatSystemPatch;
-            patch.Patch(GameInfo.CombatSystem.GetComponent<CombatSystem>());
+            patch.Patch(GameInfo.CombatSystem);
         }
     }
 }

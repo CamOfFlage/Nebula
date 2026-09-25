@@ -1,8 +1,12 @@
 ﻿using BepInEx;
 using BepInEx.Logging;
 using BepInEx.Unity.IL2CPP;
+using HarmonyLib;
 using Il2CppInterop.Runtime.Injection;
 using Nebula.Combat;
+using Nebula.Combat.Hooks;
+using Nebula.GameSystem.Hooks;
+using UnityEngine.Rendering;
 
 namespace Nebula
 {
@@ -10,6 +14,7 @@ namespace Nebula
     internal class Plugin : BasePlugin
     {
         internal static ManualLogSource logger;
+        internal static Harmony Harmony;
         
         public override void Load()
         {
@@ -26,6 +31,14 @@ namespace Nebula
             
             GlobalCombatTemplatePatchHandler.instance = new GlobalCombatTemplatePatchHandler();
             ProjectilePatchHandler.Instance = new ProjectilePatchHandler();
+            
+            SplashScreen.Stop(SplashScreen.StopBehavior.StopImmediate);
+            
+            Harmony harmony = new Harmony(PluginInfo.PLUGIN_GUID);
+            Harmony = harmony;
+            harmony.PatchAll(typeof(SplashScreenRemoveHooks));
+            harmony.PatchAll(typeof(TitleSlidesRemoveHooks));
+            
             Log.LogMessage($"{PluginInfo.PLUGIN_NAME} loaded!");
         }
     }
@@ -34,6 +47,6 @@ namespace Nebula
     {
         public const string PLUGIN_GUID = "com.CamOfFlage.Nebula";
         public const string PLUGIN_NAME = "Nebula";
-        public const string PLUGIN_VERSION = "0.0.1";
+        public const string PLUGIN_VERSION = "0.1.1";
     }
 }

@@ -1,5 +1,7 @@
 ﻿using HarmonyLib;
 using Nebula.Combat;
+using Noname.Worldless.Combat;
+using Noname.Worldless.Navigation;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -24,14 +26,13 @@ public class BootChecker : MonoBehaviour
         {
             Plugin.logger.LogMessage("Boot finished");
             GameInfo.IsBooted = true;
-            Harmony harmony = new Harmony(PluginInfo.PLUGIN_GUID);
-            harmony.PatchAll();
+            Plugin.Harmony.PatchAll();
             Plugin.logger.LogMessage("Harmony Patched");
             try
             {
-                GameInfo.CombatSystem = GameObject.Find("CombatSystem(Clone)");
+                GameInfo.CombatSystem = GameObject.Find("CombatSystem(Clone)").GetComponent<CombatSystem>();
                 CombatSystemPatchHandler.Instance.PatchCombat();
-                GameInfo.NavigationSystem = GameObject.Find("NavigationSystem(Clone)");
+                GameInfo.NavigationSystem = GameObject.Find("NavigationSystem(Clone)").GetComponent<NavigationSystem>();
             }
             catch (Exception e)
             {

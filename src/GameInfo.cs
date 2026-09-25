@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using Noname.Worldless.Combat;
+using Noname.Worldless.Navigation;
+using UnityEngine;
 
 namespace Nebula;
 
@@ -28,14 +30,14 @@ public static class GameInfo
     /// <remarks>
     /// May not be loaded immediately 
     /// </remarks>
-    public static GameObject? CombatSystem { get; set; }
+    public static CombatSystem? CombatSystem { get; set; }
     /// <summary>
     /// The base NavigationSystem game object
     /// </summary>
     /// <remarks>
     /// May not be loaded immediately 
     /// </remarks>
-    public static GameObject? NavigationSystem { get; set; }
+    public static NavigationSystem? NavigationSystem { get; set; }
     
     /// <summary>
     /// Contains the keys for all the attack warnings in the game
