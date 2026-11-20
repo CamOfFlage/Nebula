@@ -4,8 +4,11 @@ using BepInEx.Unity.IL2CPP;
 using HarmonyLib;
 using Il2CppInterop.Runtime.Injection;
 using Nebula.Combat;
-using Nebula.GameSystem.Hooks;
+using Nebula.GameSystems.Hooks;
 using Nebula.Reflection;
+using Noname.Worldless.Combat;
+using Noname.Worldless.Navigation;
+using UnityEngine;
 using UnityEngine.Rendering;
 
 namespace Nebula
@@ -33,7 +36,9 @@ namespace Nebula
             ProjectilePatchHandler.Instance = new ProjectilePatchHandler();
 
             IL2CPPChainloader.Instance.PluginLoad += NebulaModsManager.OnNewPluginLoad;
-            
+            NebulaGameEvents.BootStarted += NebulaModsManager.BootStart;
+            NebulaGameEvents.BootStarted += Boot;
+                
             SplashScreen.Stop(SplashScreen.StopBehavior.StopImmediate);
             
             Harmony harmony = new Harmony(NebulaPluginInfo.PLUGIN_GUID);
@@ -42,6 +47,23 @@ namespace Nebula
             harmony.PatchAll(typeof(TitleSlidesRemoveHooks));
             
             Log.LogMessage($"{NebulaPluginInfo.PLUGIN_NAME} loaded!");
+        }
+
+        internal void Boot()
+        {
+            Plugin.Harmony.PatchAll();
+            Plugin.logger.LogMessage("Harmony Patched");
+            try
+            {
+                GameInfo.CombatSystem = GameObject.Find("CombatSystem(Clone)").GetComponent<CombatSystem>();
+                CombatSystemPatchHandler.Instance.PatchCombat();
+                GameInfo.NavigationSystem = GameObject.Find("NavigationSystem(Clone)").GetComponent<NavigationSystem>();
+            }
+            catch (Exception e)
+            {
+                Plugin.logger.LogError("Encountered errors whilst patching the combatSystem, this will likely impact gameplay. Some, or all, mods may not work");
+                Plugin.logger.LogError($"Error: {e}");
+            }
         }
     }
 

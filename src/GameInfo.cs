@@ -1,4 +1,5 @@
-﻿using Noname.Worldless.Combat;
+﻿using Noname;
+using Noname.Worldless.Combat;
 using Noname.Worldless.Navigation;
 using UnityEngine;
 
@@ -25,19 +26,26 @@ public static class GameInfo
     internal static BootChecker? BootChecker;
     internal static NebulaGameManager GameManager { get; set; }
     /// <summary>
-    /// The base CombatSystem game object
+    /// The base CombatSystem
     /// </summary>
     /// <remarks>
     /// May not be loaded immediately 
     /// </remarks>
-    public static CombatSystem? CombatSystem { get; set; }
+    public static CombatSystem? CombatSystem { get; internal set; }
     /// <summary>
-    /// The base NavigationSystem game object
+    /// The base NavigationSystem
     /// </summary>
     /// <remarks>
     /// May not be loaded immediately 
     /// </remarks>
-    public static NavigationSystem? NavigationSystem { get; set; }
+    public static NavigationSystem? NavigationSystem { get; internal set; }
+    /// <summary>
+    /// The base MainSystem
+    /// </summary>
+    /// <remarks>
+    /// May not be loaded immediately 
+    /// </remarks>
+    public static MainSystem? MainSystem { get; internal set; }
     
     /// <summary>
     /// Contains the keys for all the attack warnings in the game

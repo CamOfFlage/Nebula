@@ -2,7 +2,7 @@
 using HarmonyLib;
 using Noname;
 
-namespace Nebula.GameSystem.Hooks;
+namespace Nebula.GameSystems.Hooks;
 
 [HarmonyPatch(typeof(EffectsLoader), "LoadEffects")]
 internal class EffectsLoaderHooks

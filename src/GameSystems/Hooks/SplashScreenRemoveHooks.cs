@@ -2,7 +2,7 @@
 using Noname.Worldless.UI;
 using UnityEngine.Rendering;
 
-namespace Nebula.GameSystem.Hooks;
+namespace Nebula.GameSystems.Hooks;
 
 [HarmonyPatch(typeof(SplashScreen))]
 internal class SplashScreenRemoveHooks

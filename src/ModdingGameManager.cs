@@ -1,6 +1,10 @@
 ﻿using System.Collections;
+using HarmonyLib;
 using Il2CppInterop.Runtime.Attributes;
 using Nebula.Combat;
+using Nebula.Combat.Hooks;
+using Nebula.GameSystems.Hooks;
+using Nebula.Navigation.Hooks;
 using Noname;
 using Noname.Worldless.Combat;
 using UnityEngine;
@@ -45,4 +49,13 @@ internal class NebulaGameManager : MonoBehaviour
             }
         }
     }
+
+    
+    public void Start()
+    {
+        Plugin.Harmony.PatchAll(typeof(MainSystemHooks));
+        Plugin.Harmony.PatchAll(typeof(CombatSystemHooks));
+        Plugin.Harmony.PatchAll(typeof(NavigationSystemHooks));
+    }
+    
 }

@@ -1,4 +1,5 @@
 ﻿using HarmonyLib;
+using Nebula.GameSystems;
 using Noname.Worldless.Navigation;
 
 namespace Nebula.Navigation.Hooks;
