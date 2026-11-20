@@ -4,7 +4,12 @@ using Noname.Worldless.Combat;
 
 namespace Nebula.Combat;
 
-public class FighterComponent : MonoBehaviour
+/// <summary>
+/// <para>All subclasses function as IFighterComponents in the Il2Cpp domain, and will be recognised by the game's systems</para>
+/// <para> Every class extending this must implement <c>public void SubscribeToCombatEvents(bool subscribe)</c>
+/// and <c>public void Init()</c></para>
+/// </summary>
+public abstract class FighterComponent : MonoBehaviour
 {
     public FighterComponent(IntPtr intPtr) : base(intPtr) { }
     public static void RegisterFighterComponent(Type fighterComponentType)

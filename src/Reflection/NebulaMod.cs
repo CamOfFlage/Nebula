@@ -38,10 +38,19 @@ internal class NebulaMod : Loadable
                 foreach (Type type in _usingNebulaReflection)
                 {
                     Plugin.logger.LogDebug($"Managing type {type.Name}");
-                    if (NebulaReflectionTypes.ManagementActions.ContainsKey(type.BaseType))
+                    foreach (Type parentType in NebulaReflectionTypes.GetAllRelevantParents(type))
                     {
-                        Plugin.logger.LogDebug($"{type.Name} has valid key");
-                        NebulaReflectionTypes.ManagementActions[type.BaseType].Invoke(null, new object[] { type });
+                        if (NebulaReflectionTypes.ManagementActions.ContainsKey(parentType))
+                        {
+                            Plugin.logger.LogDebug($"{type.Name} has valid key");
+                            if (NebulaReflectionTypes.ManagementActions[parentType] == null)
+                            {
+                                Plugin.logger.LogError("Failed to find method to invoke");
+                                return;
+                            }
+                            NebulaReflectionTypes.ManagementActions[parentType].Invoke(null, new object[] { type });
+                            break;
+                        }
                     }
                 }
             });
@@ -49,8 +58,7 @@ internal class NebulaMod : Loadable
         catch (Exception e)
         {
             _plugin.Log.LogError("An exception occured while trying to load Nebula Reflection usages, " +
-                                 "some features may not work correctly.");
-            _plugin.Log.LogError(e.ToString());
+                                 "some features may not work correctly.\n" + e);
         }
 
         FinishLoad();

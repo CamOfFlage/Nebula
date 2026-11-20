@@ -16,7 +16,8 @@ public static class GameInfo
     /// <remarks>
     /// This is showing the core boot sequence, not the game specific boot sequence. It changes upon the title cards ending, not the main loading screen.
     /// </remarks>
-    public static bool IsBooted { get; set; } = false;
+    public static bool IsBooted { get; internal set; } = false;
+    public static bool NebulaLoaded { get; internal set; } = false;
     /// <summary>
     /// The base <see cref="BootChecker"/> for Nebula
     /// </summary>

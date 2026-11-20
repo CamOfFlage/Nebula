@@ -5,11 +5,17 @@ namespace Nebula;
 public abstract class NebulaPatch
 {
     public abstract string PatchId { get; }
-    public abstract PatchHandler GetPatchHandler();
+    protected abstract PatchHandler GetPatchHandler();
     
-    public void Register()
+    internal static void Register(Type patch)
     {
-        Plugin.logger.LogMessage($"Nebula Patch {PatchId} registered");
-        GetPatchHandler().Patches.Add(this);
+        NebulaPatch patchInstance = Activator.CreateInstance(patch) as NebulaPatch;
+        if (patchInstance == null)
+        {
+            Plugin.logger.LogError($"Encountered issues trying to register type {patch.Name} as a Nebula patch.");
+            return;
+        }
+        patchInstance.GetPatchHandler().Patches.Add(patchInstance);
+        Plugin.logger.LogMessage($"Nebula Patch {patchInstance.PatchId} registered");
     }
 }

@@ -38,6 +38,9 @@ namespace Nebula
             IL2CPPChainloader.Instance.PluginLoad += NebulaModsManager.OnNewPluginLoad;
             NebulaGameEvents.BootStarted += NebulaModsManager.BootStart;
             NebulaGameEvents.BootStarted += Boot;
+
+            NebulaGameEvents.NebulaLoadFinished += CombatSystemPatchHandler.Instance.ReleaseEarly;
+            NebulaGameEvents.NebulaLoadFinished += GlobalCombatTemplatePatchHandler.instance.ReleaseEarly;
                 
             SplashScreen.Stop(SplashScreen.StopBehavior.StopImmediate);
             

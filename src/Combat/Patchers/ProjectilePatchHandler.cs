@@ -13,12 +13,10 @@ public class ProjectilePatchHandler : PatchHandler
         foreach (NebulaPatch patch in this.Patches)
         {
             ProjectilePatch projectilePatch = patch as ProjectilePatch;
-            if (projectilePatch != null)
+            if (projectilePatch == null) return;
+            if (projectilePatch.ProjectileKey == projectileId)
             {
-                if (projectilePatch.ProjectileKey == projectileId)
-                {
-                    projectilePatch.Patch(effect);
-                }
+                projectilePatch.Patch(effect);
             }
         }
     }

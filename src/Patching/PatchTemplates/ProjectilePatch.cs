@@ -5,7 +5,7 @@ namespace Nebula.Combat;
 
 public abstract class ProjectilePatch : NebulaPatch
 {
-    public override PatchHandler GetPatchHandler() => ProjectilePatchHandler.Instance;
+    protected override PatchHandler GetPatchHandler() => ProjectilePatchHandler.Instance;
     
     public abstract void Patch(GameObject effect);
     public abstract string ProjectileKey { get; }

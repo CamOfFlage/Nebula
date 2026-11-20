@@ -17,12 +17,10 @@ public static class NebulaLoadManager
     internal static void FinishLoadable(Loadable loadable)
     {
         WaitingOn.Remove(loadable);
-        bool isComplete = IsLoadingComplete();
-        if (isComplete && isFreezingMenu)
+        if (IsLoadingComplete())
         {
-            LoadingScreenController.SetNebulaLoad(false);
+            NebulaLoadFinish();
         }
-        NebulaLoadingComplete = isComplete;
     }
 
     private static bool IsLoadingComplete()
@@ -31,6 +29,17 @@ public static class NebulaLoadManager
         return WaitingOn.Count == 0;
     }
 
+    private static void NebulaLoadFinish()
+    {
+        if (isFreezingMenu)
+        {
+            LoadingScreenController.SetNebulaLoad(false);
+        }
+        NebulaLoadingComplete = true;
+        GameInfo.NebulaLoaded = true;
+        NebulaGameEvents.InvokeNebulaLoadFinished();
+    }
+    
     internal static void MainMenuStart()
     {
         Plugin.logger.LogDebug("MainMenuStart");
